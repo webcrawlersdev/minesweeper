@@ -1,53 +1,94 @@
 import { memo, useEffect, useState, useCallback } from "react";
 import { atom, useAtom } from "jotai";
-import { atomWithImmer } from "jotai/immer";
 import produce from "immer";
 
+const dugCellsNumAtom = atom(0);
+const dimSizeAtom = atom(10);
+const bombNumberAtom = atom(30);
+const lostAtom = atom(false);
+
+const wonAtom = atom(
+  (get) =>
+    get(dugCellsNumAtom) ==
+      get(dimSizeAtom) * get(dimSizeAtom) - get(bombNumberAtom) &&
+    !get(lostAtom)
+);
+
+let dugCells = [];
+
 export default function Board() {
-  const dugCellsAtom = atom([]);
-  const [dugCells, setDugCells] = useAtom(dugCellsAtom);
+  const [won] = useAtom(wonAtom);
+  const [lost, setLost] = useAtom(lostAtom);
+  const [dugCellsNum, setDugCellsNum] = useAtom(dugCellsNumAtom);
+  const [dimSize] = useAtom(dimSizeAtom);
+  const [bombNumber] = useAtom(bombNumberAtom);
+
   const [board, setBoard] = useState([]);
-  const [gameState, setGameState] = useState("");
+
+  const resetGame = () => {
+    setDugCellsNum(0);
+    setLost(false);
+    dugCells = [];
+    setBoard(create_board(dimSize, bombNumber));
+  };
 
   useEffect(() => {
-    setBoard(create_board(10, 10));
+    resetGame();
   }, []);
 
   useEffect(() => {
-    console.table(board);
+    //console.table(board);
   }, [board]);
 
+  useEffect(() => {
+    // console.log(won);
+  }, [won]);
+
+  useEffect(() => {
+    console.log(dugCellsNum);
+  }, [dugCellsNum]);
+
   return (
-    <div>
-      {board.map((rows, r) => {
-        return (
-          <ol className="flex h-10" key={`${r}`}>
-            {rows.map((item, c) => {
-              return (
-                <Cell
-                  board={board}
-                  setBoard={setBoard}
-                  key={`${r}-${c}`}
-                  item={item}
-                  row={r}
-                  col={c}
-                />
-              );
-            })}
-          </ol>
-        );
-      })}
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="mb-6">Bombs: {bombNumber}</h1>
+      <main className="flex flex-col gap-1">
+        {board.map((rows, r) => {
+          return (
+            <div className="flex h-7 md:h-10 gap-1" key={`${r}`}>
+              {rows.map((item, c) => {
+                return (
+                  <Cell
+                    board={board}
+                    setBoard={setBoard}
+                    key={`${r}-${c}`}
+                    item={item}
+                    row={r}
+                    col={c}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
+      </main>
+      <h1>{lost ? "YOU LOST" : won ? "YOU WON" : "Not yet"}</h1>
+      <button onClick={resetGame}>Reset game</button>
     </div>
   );
 }
 
-// TODO, take board and setBoard off of the props
 const Cell = memo(({ item, row, col, board, setBoard }) => {
+  const [, setDugCellsNum] = useAtom(dugCellsNumAtom);
+  const [, setLost] = useAtom(lostAtom);
+
   const dig = useCallback((row, col, board) => {
     if (board[row][col].includes("h")) {
-      dugCells.push(`${row}-${col}`);
+      setDugCellsNum(dugCells.push(`${row}-${col}`));
     }
-    console.log(dugCells);
+
+    if (board[row][col].includes("*")) {
+      setLost(true);
+    }
 
     if (board[row][col].includes("0") && board[row][col].includes("h")) {
       for (let r = -1; r <= 1; r++) {
@@ -70,11 +111,6 @@ const Cell = memo(({ item, row, col, board, setBoard }) => {
                   (element) => element == `${checking_row}-${checking_col}`
                 )
               ) {
-                console.log(
-                  "a neighbour includes a 0",
-                  checking_row,
-                  checking_col
-                );
                 dig(checking_row, checking_col, board);
               }
             }
@@ -94,20 +130,20 @@ const Cell = memo(({ item, row, col, board, setBoard }) => {
   const open = item[2];
 
   return (
-    <li
-      className={`w-10 border border-black ${
-        item.includes("*") ? "bg-red-400" : "bg-green-300"
+    <div
+      className={`w-7 md:w-10 focus-within:ring ring-yellow-300 rounded ${
+        item.includes("*") ? "bg-red-400 " : "bg-green-300"
       }`}
     >
       <button
-        className="w-full h-full bg-gray-300 bg-opacity-25"
+        className="w-full h-full"
         onClick={() => {
           dig(row, col, board);
         }}
       >
         {open == "v" ? value : flag != "_" ? flag : " "}
       </button>
-    </li>
+    </div>
   );
 });
 
