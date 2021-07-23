@@ -87,7 +87,7 @@ const Cell = memo(
         setLost(true);
       }
 
-      if (board[row][col].includes("0") && board[row][col].includes("h")) {
+      if (board[row][col].includes(" ") && board[row][col].includes("h")) {
         for (let r = -1; r <= 1; r++) {
           for (let c = -1; c <= 1; c++) {
             let checking_row = row + r;
@@ -234,6 +234,9 @@ const getNumOfNeighboringBombs = (board, row, col) => {
       }
     }
   }
-
-  return num;
+  if (num > 0) {
+    return num;
+  } else {
+    return " ";
+  }
 };
