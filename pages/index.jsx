@@ -1,3 +1,34 @@
+const create_board = (dim_size, bomb_number) => {
+  // create an array with the amount of cells the board will have
+  let board_array = new Array(dim_size * dim_size).fill(" _h");
+
+  // put the bombs in the board
+  board_array.fill("*_h", 0, bomb_number);
+
+  // suffle the board to distribute the bombs
+  board_array = fisherYatesShuffle(board_array);
+
+  // create a two dimentional array `board` from the suffled board
+  let board = singleToMultiDimentionalArray(board_array, dim_size);
+
+  // evaluate and assign the number of neighboring bombs for each cell
+  for (let r = 0; r <= dim_size - 1; r++) {
+    for (let c = 0; c <= dim_size - 1; c++) {
+      if (
+        // don't need to assign neighboringbombs to bomb cells
+        !board[r][c].includes("*")
+      ) {
+        board[r][c] = board[r][c].replace(
+          " ",
+          getNumOfNeighboringBombs(board, r, c)
+        );
+      }
+    }
+  }
+
+  return board;
+};
+
 /**  Credit:
  * http://bost.ocks.org/mike/shuffle/
  */
