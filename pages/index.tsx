@@ -3,8 +3,8 @@ import { atom, useAtom } from "jotai";
 import produce from "immer";
 
 const dugCellsNumAtom = atom(0);
-const dimSizeAtom = atom(10);
-const bombNumberAtom = atom(30);
+const dimSizeAtom = atom(16);
+const bombNumberAtom = atom(40);
 const lostAtom = atom(false);
 
 const wonAtom = atom(
@@ -54,7 +54,7 @@ export default function Board() {
       <main className="flex flex-col gap-1">
         {board.map((rows, r) => {
           return (
-            <div className="flex h-7 md:h-10 gap-1" key={`${r}`}>
+            <div className="flex h-5 md:h-10 gap-1" key={`${r}`}>
               {rows.map((item, c) => {
                 return (
                   <Cell
@@ -131,8 +131,8 @@ const Cell = memo(({ item, row, col, board, setBoard }) => {
 
   return (
     <div
-      className={`w-7 md:w-10 focus-within:ring ring-yellow-300 rounded ${
-        item.includes("*") ? "bg-red-400 " : "bg-green-300"
+      className={`w-5 md:w-10 focus-within:ring ring-yellow-300 rounded ${
+        open.includes("h") ? "bg-gray-300" : "bg-green-300"
       }`}
     >
       <button
