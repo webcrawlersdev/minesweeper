@@ -19,3 +19,14 @@ const fisherYatesShuffle = function (array) {
 
   return array;
 };
+
+const singleToMultiDimentionalArray = (initial_array, num_cols) => {
+  let rows = initial_array.length / num_cols;
+  let multi_dimentional_array = [];
+
+  for (let i = 0; i < rows; i++) {
+    multi_dimentional_array.push(initial_array.splice(0, num_cols));
+  }
+
+  return multi_dimentional_array;
+};
