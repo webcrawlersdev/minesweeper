@@ -77,7 +77,20 @@ export default function Board() {
   );
 }
 
-const Cell = memo(({ item, row, col, board, setBoard }) => {
+const Cell = memo(
+  ({
+    item,
+    row,
+    col,
+    board,
+    setBoard,
+  }: {
+    item: string;
+    row: number;
+    col: number;
+    board;
+    setBoard;
+  }) => {
   const [, setDugCellsNum] = useAtom(dugCellsNumAtom);
   const [, setLost] = useAtom(lostAtom);
 
