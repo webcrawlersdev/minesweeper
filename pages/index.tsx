@@ -19,7 +19,7 @@ let dugCells = [];
 export default function Board() {
   const [won] = useAtom(wonAtom);
   const [lost, setLost] = useAtom(lostAtom);
-  const [dugCellsNum, setDugCellsNum] = useAtom(dugCellsNumAtom);
+  const [, setDugCellsNum] = useAtom(dugCellsNumAtom);
   const [dimSize] = useAtom(dimSizeAtom);
   const [bombNumber] = useAtom(bombNumberAtom);
 
