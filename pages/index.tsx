@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback, useRef } from "react";
 import { atom, useAtom } from "jotai";
 import produce from "immer";
 
@@ -14,23 +14,27 @@ const wonAtom = atom(
     !get(lostAtom)
 );
 
-let dugCells = [];
-
 export default function Board() {
   const [won] = useAtom(wonAtom);
   const [lost, setLost] = useAtom(lostAtom);
-  const [, setDugCellsNum] = useAtom(dugCellsNumAtom);
+  const [dugCellsNum, setDugCellsNum] = useAtom(dugCellsNumAtom);
   const [dimSize] = useAtom(dimSizeAtom);
   const [bombNumber] = useAtom(bombNumberAtom);
+
+  const dugCellsRef = useRef([]);
 
   const [board, setBoard] = useState([]);
 
   const resetGame = () => {
+    dugCellsRef.current = [];
     setDugCellsNum(0);
     setLost(false);
-    dugCells = [];
     setBoard(create_board(dimSize, bombNumber));
   };
+
+  useEffect(() => {
+    console.log(dugCellsRef.current.length, dugCellsNum);
+  }, [dugCellsNum]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -48,6 +52,7 @@ export default function Board() {
                     item={item}
                     row={r}
                     col={c}
+                    dugCellsRef={dugCellsRef}
                   />
                 );
               })}
@@ -68,19 +73,21 @@ const Cell = memo(
     col,
     board,
     setBoard,
+    dugCellsRef,
   }: {
     item: string;
     row: number;
     col: number;
     board;
     setBoard;
+    dugCellsRef;
   }) => {
     const [, setDugCellsNum] = useAtom(dugCellsNumAtom);
     const [, setLost] = useAtom(lostAtom);
 
     const dig = useCallback((row, col, board) => {
       if (board[row][col].includes("h")) {
-        setDugCellsNum(dugCells.push(`${row}-${col}`));
+        setDugCellsNum(dugCellsRef.current.push(`${row}-${col}`));
       }
 
       if (board[row][col].includes("*")) {
@@ -104,7 +111,7 @@ const Cell = memo(
                 checking_col <= board.length - 1
               ) {
                 if (
-                  !dugCells.find(
+                  !dugCellsRef.current.find(
                     (element) => element == `${checking_row}-${checking_col}`
                   )
                 ) {
