@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@radix-ui/colors": "^0.1.7",
     "@stitches/react": "^1.0.0",
     "immer": "^9.0.5",
     "jotai": "^1.2.2",
