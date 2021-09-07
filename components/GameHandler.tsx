@@ -80,10 +80,10 @@ export default function GameHandler({
   };
 
   return (
-    <div className="flex gap-2 flex-col">
+    <div className="flex flex-col gap-[2px]">
       {isThisCellRevealed &&
         board.map((row, i) => (
-          <div key={`row-${i}`} className="flex gap-2">
+          <Row key={`row-${i}`} className="flex gap-[2px]">
             {row.map((value, j) => (
               <Cell
                 //memoize this later to see if the entire board rerenders
@@ -100,13 +100,41 @@ export default function GameHandler({
                 }}
               />
             ))}
-          </div>
+          </Row>
         ))}
     </div>
   );
 }
 
+const Row = styled("div", {
+  display: "flex",
+  gap: "2px",
+
+  /* Add bottom border for all boxes except the last row */
+  "&:not(:last-child) > *::after": {
+    content: "",
+    position: "absolute",
+    bottom: "-2px",
+    width: "50%",
+    left: "25%",
+    height: "2px",
+    backgroundColor: "$border",
+  },
+
+  /* Add right border for all indexed boxes except last one */
+  "& > *:not(:last-child):before": {
+    content: "",
+    position: "absolute",
+    right: "-2px",
+    height: "50%",
+    top: "25%",
+    width: "2px",
+    backgroundColor: "$border",
+  },
+});
+
 import { useRef, useEffect, useState } from "react";
 import Cell from "./NewCell";
 
 import { singleToMultiDimentionalArray } from "../lib/utils";
+import { styled } from "@stitches/react";

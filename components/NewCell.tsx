@@ -45,8 +45,8 @@ export default function NewCell({
   };
 
   return (
-    <div
-      className="border border-blue-600"
+    <Cell
+      variant={isFlagged ? "flagged" : isRevealed ? "revealed" : "hidden"}
       onClick={reveal}
       onContextMenu={(e) => {
         e.preventDefault();
@@ -54,9 +54,35 @@ export default function NewCell({
       }}
       // Style this, make the style reactive to cellState
     >
-      {isFlagged ? "flagged" : isRevealed ? "revealed" : "hidden"} - {value}
-    </div>
+      {isRevealed && value}
+    </Cell>
   );
 }
 
+const Cell = styled("button", {
+  position: "relative",
+  width: "3rem",
+  height: "3rem",
+  borderRadius: "4px",
+  color: "$text",
+
+  variants: {
+    variant: {
+      revealed: {
+        backgroundColor: "$revealed",
+      },
+      hidden: {
+        transform: "scale(107%)",
+        borderRadius: "2px",
+        backgroundColor: "$hidden",
+      },
+      flagged: {
+        transform: "scale(80%)",
+        backgroundColor: "$flagged",
+      },
+    },
+  },
+});
+
 import { useState } from "react";
+import { styled } from "@stitches/react";

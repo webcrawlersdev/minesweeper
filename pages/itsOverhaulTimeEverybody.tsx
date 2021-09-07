@@ -5,8 +5,8 @@
 export default function Home() {
   const [board, setBoard] = useState<null | number[][]>(null);
 
-  let bombNumber = 8;
-  let dimSize = 8;
+  let bombNumber = 12;
+  let dimSize = 12;
 
   useEffect(() => {
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
@@ -17,14 +17,26 @@ export default function Home() {
   }, [board]);
 
   return (
-    <div>
+    <Box className={darkTheme}>
       {board && (
         <GameHandler board={board} bombNumber={bombNumber} dimSize={dimSize} />
       )}
-    </div>
+    </Box>
   );
 }
+
+const Box = styled("div", {
+  minHeight: "100vh",
+
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+
+  backgroundColor: "$background",
+});
 
 import { useEffect, useState } from "react";
 import GameHandler from "../components/GameHandler";
 import { createBoardWithJustNumbers } from "../lib/utils";
+import { styled } from "@stitches/react";
+import { darkTheme } from "../stitches.config";
