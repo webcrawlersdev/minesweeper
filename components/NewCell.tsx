@@ -73,9 +73,17 @@ const Box = styled("div", {
 });
 
 const reveal = keyframes({
-  "0%": { scale: "1", color: "transparent", backgroundColor: "$hidden" },
-  "50%": { scale: "1.3", color: "transparent", backgroundColor: "$hidden" },
-  "100%": { scale: ".9", color: "$text" },
+  "0%": {
+    transform: "scale(1)",
+    color: "transparent",
+    backgroundColor: "$hidden",
+  },
+  "50%": {
+    transform: "scale(1.3)",
+    color: "transparent",
+    backgroundColor: "$hidden",
+  },
+  "100%": { transform: "scale(.9)", color: "$text" },
 });
 
 const Cell = styled("button", {
@@ -99,12 +107,12 @@ const Cell = styled("button", {
         animation: `${reveal} 240ms`,
       },
       hidden: {
-        scale: "1.1",
+        transform: "scale(1.1)",
         borderRadius: "3px",
         backgroundColor: "$hidden",
       },
       flagged: {
-        scale: "0.8",
+        transform: "scale(0.8)",
         backgroundColor: "$flagged",
       },
     },
@@ -118,7 +126,7 @@ const Cell = styled("button", {
       variant: "revealed",
       bomb: true,
       css: {
-        scale: "0.8",
+        transform: "scale(0.8)",
         backgroundColor: "$bombBackground",
         borderRadius: "3px",
       },
