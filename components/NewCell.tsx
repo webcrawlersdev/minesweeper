@@ -73,7 +73,7 @@ const Box = styled("div", {
 
 const reveal = keyframes({
   "0%": { scale: "1", color: "transparent", backgroundColor: "$hidden" },
-  "50%": { scale: "1.1", color: "transparent", backgroundColor: "$hidden" },
+  "50%": { scale: "1.3", color: "transparent", backgroundColor: "$hidden" },
   "100%": { scale: ".9", color: "$text" },
 });
 
