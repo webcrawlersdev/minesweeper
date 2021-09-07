@@ -5,8 +5,8 @@
 export default function Home() {
   const [board, setBoard] = useState<null | number[][]>(null);
 
-  let bombNumber = 12;
-  let dimSize = 12;
+  let bombNumber = 40;
+  let dimSize = 22;
 
   useEffect(() => {
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
@@ -31,6 +31,7 @@ const Box = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  padding: "4rem",
 
   backgroundColor: "$background",
 });
