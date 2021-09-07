@@ -1,4 +1,11 @@
-import { mauveDark, mauve, crimson, crimsonDark } from "@radix-ui/colors";
+import {
+  mauveDark,
+  mauve,
+  crimson,
+  crimsonDark,
+  red,
+  redDark,
+} from "@radix-ui/colors";
 
 // Spread the scales in your light and dark themes
 import { createStitches } from "@stitches/react";
@@ -12,6 +19,7 @@ export const { createTheme, theme } = createStitches({
       revealed: "transparent",
       hidden: crimson.crimson9,
       flagged: mauve.mauve10,
+      bombBackground: red.red8,
       text: crimson.crimson12,
     },
   },
@@ -25,6 +33,7 @@ export const darkTheme = createTheme({
     revealed: "transparent",
     hidden: crimsonDark.crimson9,
     flagged: mauveDark.mauve10,
+    bombBackground: redDark.red8,
     text: crimsonDark.crimson12,
   },
 });
