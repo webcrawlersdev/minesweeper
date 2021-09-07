@@ -66,15 +66,7 @@ const Cell = memo(
     const open = item[2];
 
     return (
-      <div
-        className={`w-5 md:w-10 focus-within:ring ring-yellow-300 rounded select-none ${
-          open.includes("h")
-            ? "bg-gray-300"
-            : value.includes("*")
-            ? "bg-red-400"
-            : "bg-green-300"
-        }`}
-      >
+      <div className="w-5 md:w-10 focus-within:ring ring-yellow-300 rounded select-none bg-gray-300">
         <button
           className="w-full h-full"
           onClick={() => {

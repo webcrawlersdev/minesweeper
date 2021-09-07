@@ -29,7 +29,10 @@ export const create_board = (dim_size, bomb_number) => {
   return board;
 };
 
-export const createBoardWithJustNumbers = (dim_size, bomb_number) => {
+export const createBoardWithJustNumbers = (
+  dim_size: number,
+  bomb_number: number
+) => {
   // create an array with the amount of cells the board will have
   let board_array = new Array(dim_size * dim_size).fill(0);
 

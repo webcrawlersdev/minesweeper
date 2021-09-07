@@ -26,7 +26,7 @@ export default function Home() {
     dugCellsRef.current = [];
     setDugCellsNum(0);
     setLost(false);
-    setBoard(create_board(dimSize, bombNumber));
+    setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
   };
 
   return (
@@ -39,4 +39,4 @@ export default function Home() {
   );
 }
 
-import { create_board } from "../lib/utils";
+import { create_board, createBoardWithJustNumbers } from "../lib/utils";
