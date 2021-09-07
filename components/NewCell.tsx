@@ -48,6 +48,7 @@ export default function NewCell({
     <Box>
       <Cell
         variant={isRevealed ? "revealed" : isFlagged ? "flagged" : "hidden"}
+        style={{ WebkitTapHighlightColor: "transparent" }}
         disabled={isRevealed}
         bomb={value === 9}
         onClick={reveal}
