@@ -11,28 +11,28 @@ export default function GameHandler({
   bombNumber: number;
 }) {
   // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
-  const [dugCells, setDugCells] = useState(null);
+  const [isThisCellRevealed, setIsThisCellRevealed] = useState(null);
   useEffect(() => {
     let tempArray = new Array(dimSize * dimSize).fill(false);
-    setDugCells(singleToMultiDimentionalArray(tempArray, dimSize));
+    setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
   }, [dimSize, board]);
 
   useEffect(() => {
-    if (!dugCells) {
+    if (!isThisCellRevealed) {
       return;
     }
 
-    // console.table(dugCells);
-  }, [dugCells]);
+    // console.table(isThisCellRevealed);
+  }, [isThisCellRevealed]);
 
-  const dugCellsRef = useRef([]);
+  const revealedCells = useRef([]);
 
   const revealCell = (row, col, board, value) => {
-    dugCellsRef.current.push(`${row}-${col}`);
+    revealedCells.current.push(`${row}-${col}`);
     // Send if this was a bomb or not to the game handler
-    let tempArray = [...dugCells];
+    let tempArray = [...isThisCellRevealed];
     tempArray[row][col] = true;
-    setDugCells(tempArray);
+    setIsThisCellRevealed(tempArray);
 
     switch (value) {
       case 0: //this was an empty cell
@@ -52,7 +52,7 @@ export default function GameHandler({
                 checking_col <= board.length - 1
               ) {
                 if (
-                  !dugCellsRef.current.find(
+                  !revealedCells.current.find(
                     (element) => element == `${checking_row}-${checking_col}`
                   )
                 ) {
@@ -81,7 +81,7 @@ export default function GameHandler({
 
   return (
     <div className="flex gap-2 flex-col">
-      {dugCells &&
+      {isThisCellRevealed &&
         board.map((row, i) => (
           <div key={`row-${i}`} className="flex gap-2">
             {row.map((value, j) => (
@@ -89,7 +89,7 @@ export default function GameHandler({
                 //memoize this later to see if the entire board rerenders
                 key={`cell-${i}-${j}`}
                 value={value}
-                isRevealed={dugCells[i][j]}
+                isRevealed={isThisCellRevealed[i][j]}
                 coords={[i, j]}
                 handleReveal={() => revealCell(i, j, board, board[i][j])}
                 handleEmptyCell={(coords) => {
