@@ -45,25 +45,40 @@ export default function NewCell({
   };
 
   return (
-    <Cell
-      variant={isFlagged ? "flagged" : isRevealed ? "revealed" : "hidden"}
-      onClick={reveal}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        handleFlag();
-      }}
-      // Style this, make the style reactive to cellState
-    >
-      {isRevealed ? (value === 9 ? "*" : value > 0 && value) : " "}
-    </Cell>
+    <Box>
+      <Cell
+        variant={isRevealed ? "revealed" : isFlagged ? "flagged" : "hidden"}
+        disabled={isRevealed}
+        bomb={value === 9}
+        onClick={reveal}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          handleFlag();
+        }}
+        // Style this, make the style reactive to cellState
+      >
+        {isRevealed ? (value === 9 ? "*" : value > 0 && value) : " "}
+      </Cell>
+    </Box>
   );
 }
 
-const Cell = styled("button", {
+const Box = styled("div", {
   position: "relative",
+  zIndex: "1",
+
   width: "3rem",
   height: "3rem",
+});
+
+const Cell = styled("button", {
+  //position and zindex so this is displayed above the grid lines
+  position: "relative",
+  zIndex: "1",
+
   borderRadius: "4px",
+  width: "100%",
+  height: "100%",
   color: "$text",
 
   variants: {
@@ -72,7 +87,7 @@ const Cell = styled("button", {
         backgroundColor: "$revealed",
       },
       hidden: {
-        transform: "scale(107%)",
+        transform: "scale(110%)",
         borderRadius: "3px",
         backgroundColor: "$hidden",
       },
@@ -81,7 +96,22 @@ const Cell = styled("button", {
         backgroundColor: "$flagged",
       },
     },
+    bomb: {
+      true: {},
+    },
   },
+
+  compoundVariants: [
+    {
+      variant: "revealed",
+      bomb: true,
+      css: {
+        transform: "scale(80%)",
+        backgroundColor: "$bombBackground",
+        borderRadius: "3px",
+      },
+    },
+  ],
 });
 
 import { useState } from "react";

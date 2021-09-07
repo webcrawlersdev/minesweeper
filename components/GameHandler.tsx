@@ -112,6 +112,7 @@ const Row = styled("div", {
 
   /* Add bottom border for all boxes except the last row */
   "&:not(:last-child) > *::after": {
+    zIndex: "0",
     content: "",
     position: "absolute",
     bottom: "-2px",
@@ -123,6 +124,7 @@ const Row = styled("div", {
 
   /* Add right border for all indexed boxes except last one */
   "& > *:not(:last-child):before": {
+    zIndex: "0",
     content: "",
     position: "absolute",
     right: "-2px",
