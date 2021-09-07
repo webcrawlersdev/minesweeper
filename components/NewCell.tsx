@@ -71,6 +71,12 @@ const Box = styled("div", {
   height: "3rem",
 });
 
+const reveal = keyframes({
+  "0%": { scale: "1", color: "transparent", backgroundColor: "$hidden" },
+  "50%": { scale: "1.1", color: "transparent", backgroundColor: "$hidden" },
+  "100%": { scale: ".9", color: "$text" },
+});
+
 const Cell = styled("button", {
   //position and zindex so this is displayed above the grid lines
   position: "relative",
@@ -81,18 +87,23 @@ const Cell = styled("button", {
   height: "100%",
   color: "$text",
 
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+
+  animationTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+
   variants: {
     variant: {
       revealed: {
-        backgroundColor: "$revealed",
+        animation: `${reveal} 240ms`,
       },
       hidden: {
-        transform: "scale(110%)",
+        scale: "1.1",
         borderRadius: "3px",
         backgroundColor: "$hidden",
       },
       flagged: {
-        transform: "scale(80%)",
+        scale: "0.8",
         backgroundColor: "$flagged",
       },
     },
@@ -106,7 +117,7 @@ const Cell = styled("button", {
       variant: "revealed",
       bomb: true,
       css: {
-        transform: "scale(80%)",
+        scale: "0.8",
         backgroundColor: "$bombBackground",
         borderRadius: "3px",
       },
@@ -115,4 +126,4 @@ const Cell = styled("button", {
 });
 
 import { useState } from "react";
-import { styled } from "@stitches/react";
+import { styled, keyframes } from "@stitches/react";
