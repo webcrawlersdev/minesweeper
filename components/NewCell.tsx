@@ -54,7 +54,7 @@ export default function NewCell({
       }}
       // Style this, make the style reactive to cellState
     >
-      {isRevealed && value}
+      {isRevealed ? (value === 9 ? "*" : value > 0 && value) : " "}
     </Cell>
   );
 }
@@ -73,7 +73,7 @@ const Cell = styled("button", {
       },
       hidden: {
         transform: "scale(107%)",
-        borderRadius: "2px",
+        borderRadius: "3px",
         backgroundColor: "$hidden",
       },
       flagged: {
