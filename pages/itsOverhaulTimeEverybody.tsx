@@ -13,12 +13,15 @@ export default function Home() {
   let dimSize = 22;
 
   useEffect(() => {
-    setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
-  }, []);
-
-  useEffect(() => {
     console.log(board);
   }, [board]);
+
+  const startNewGame = () => {
+    revealedCells.current = [];
+    setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
+    let tempArray = new Array(dimSize * dimSize).fill(false);
+    setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
+  };
 
   // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
   const [isThisCellRevealed, setIsThisCellRevealed] = useState(null);
@@ -79,8 +82,17 @@ export default function Home() {
 
   return (
     <Box className={darkTheme} ref={target} css={{ touchAction: "none" }}>
-      {board && (
+      {!board ? (
+        <div>
+          Tutorial stuff
+          <br />
+          <button onClick={startNewGame}>Start game {">"}</button>
+        </div>
+      ) : (
         <>
+          <Ui css={{ top: "5%", left: "2rem" }}>
+            <button onClick={startNewGame}>Start new game</button>
+          </Ui>
           <animated.div
             style={{
               ...style,
@@ -95,7 +107,7 @@ export default function Home() {
               dimSize={dimSize}
             />
           </animated.div>
-          <Ui css={{ bottom: "5%" }}>
+          <Ui css={{ bottom: "2rem" }}>
             <div>
               bombNumber: {bombNumber} <br />
               dimSize: {dimSize}
@@ -116,12 +128,12 @@ const Box = styled("div", {
 
   backgroundColor: "$background",
   height: "100vh",
+
+  color: "$text",
 });
 
 const Ui = styled("div", {
   position: "absolute",
-  color: "$text",
-
   zIndex: "10",
 });
 
