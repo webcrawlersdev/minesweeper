@@ -62,12 +62,12 @@ export default function NewCell({
       >
         {isRevealed ? (
           value === 9 ? (
-            "*"
+            <GearIcon width="30" height="30" />
           ) : (
             value > 0 && value
           )
         ) : isFlagged ? (
-          <ExclamationTriangleIcon width="30" height="30" />
+          <BookmarkIcon width="30" height="30" />
         ) : (
           " "
         )}
@@ -159,5 +159,5 @@ const Cell = styled("div", {
 });
 
 import { useState } from "react";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "@stitches/react";
