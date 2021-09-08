@@ -46,24 +46,14 @@ export default function Home() {
         api.start({ scale: s });
         return memo;
       },
-      onWheel: ({ first, offset: [, s], memo }) => {
-        if (first) {
-          const { width, height, x, y } =
-            target.current.getBoundingClientRect();
-          const tx = x + width / 2;
-          const ty = y + height / 2;
-          memo = [style.x.get(), style.y.get(), tx, ty];
-        }
-        api.start({ scale: s / 800 });
-        return memo;
-      },
+      onWheel: ({ offset: [, s] }) => api.start({ scale: 1 + s / 1200 }),
     },
     {
       target: target,
       eventOptions: { passive: false },
-      drag: { from: () => [style.x.get(), style.y.get()] },
-      pinch: { scaleBounds: { min: 0.2, max: 2 }, rubberband: true },
-      wheel: { scaleBounds: { min: 0.2, max: 2 }, rubberband: true },
+      drag: { from: () => [style.x.get(), style.y.get()], filterTaps: true },
+      pinch: { bounds: { min: 0.2, max: 2 }, rubberband: true },
+      wheel: { bounds: { min: 0.2, max: 2 }, rubberband: true },
     }
   );
 
