@@ -2,17 +2,13 @@
 
 export default function NewCell({
   value,
-  coords,
   isRevealed,
   handleBomb,
-  handleEmptyCell,
   handleReveal,
 }: {
   value: number;
-  coords: [number, number];
   isRevealed: boolean;
   handleBomb: any;
-  handleEmptyCell: any;
   handleReveal: any;
 }) {
   const [isFlagged, setIsFlagged] = useState(false);

@@ -90,11 +90,7 @@ export default function GameHandler({
                 key={`cell-${i}-${j}`}
                 value={value}
                 isRevealed={isThisCellRevealed[i][j]}
-                coords={[i, j]}
                 handleReveal={() => revealCell(i, j, board, board[i][j])}
-                handleEmptyCell={(coords) => {
-                  console.log(`${coords[0]}-${coords[1]} was empty`);
-                }}
                 handleBomb={(coords) => {
                   console.log(`dang, ${coords[0]}-${coords[1]} was a bomb`);
                 }}
