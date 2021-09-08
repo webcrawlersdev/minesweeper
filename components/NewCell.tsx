@@ -49,12 +49,18 @@ export default function NewCell({
       <Cell
         variant={isRevealed ? "revealed" : isFlagged ? "flagged" : "hidden"}
         style={{ WebkitTapHighlightColor: "transparent" }}
-        disabled={isRevealed}
+        tabIndex={0}
         bomb={value === 9}
         onClick={reveal}
         onContextMenu={(e) => {
           e.preventDefault();
           handleFlag();
+        }}
+        onKeyDown={(e) => {
+          if (e.code === "Enter" || e.code === "Space") {
+            // this will most likely become a switch case when I try to handle navigation with the arrow keys
+            reveal();
+          }
         }}
         // Style this, make the style reactive to cellState
       >
@@ -86,7 +92,7 @@ const reveal = keyframes({
   "100%": { transform: "scale(.9)", color: "$text" },
 });
 
-const Cell = styled("button", {
+const Cell = styled("div", {
   //position and zindex so this is displayed above the grid lines
   position: "relative",
   zIndex: "1",
@@ -107,9 +113,15 @@ const Cell = styled("button", {
         animation: `${reveal} 240ms`,
       },
       hidden: {
+        cursor: "pointer",
         transform: "scale(1.1)",
         borderRadius: "3px",
         backgroundColor: "$hidden",
+
+        "&:focus": {
+          transform: "scale(1)",
+          backgroundColor: "$hiddenFocus",
+        },
       },
       flagged: {
         transform: "scale(0.8)",
