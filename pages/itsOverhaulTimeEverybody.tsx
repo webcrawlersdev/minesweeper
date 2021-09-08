@@ -63,34 +63,46 @@ export default function Home() {
   return (
     <Box className={darkTheme} ref={target} css={{ touchAction: "none" }}>
       {board && (
-        <animated.div
-          style={{
-            ...style,
-          }}
-        >
-          <GameHandler
-            board={board}
-            bombNumber={bombNumber}
-            dimSize={dimSize}
-          />
-        </animated.div>
+        <>
+          <animated.div
+            style={{
+              ...style,
+            }}
+          >
+            <GameHandler
+              board={board}
+              bombNumber={bombNumber}
+              dimSize={dimSize}
+            />
+          </animated.div>
+          <Ui css={{ bottom: "5%" }}>
+            <div>
+              bombNumber: {bombNumber} <br />
+              dimSize: {dimSize}
+            </div>
+          </Ui>
+        </>
       )}
     </Box>
   );
 }
 
 const Box = styled("div", {
-  minHeight: "100vh",
   position: "relative",
 
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
 
-  overflow: "hidden",
-  padding: "4rem",
-
   backgroundColor: "$background",
+  height: "100vh",
+});
+
+const Ui = styled("div", {
+  position: "absolute",
+  color: "$text",
+
+  zIndex: "10",
 });
 
 import { useEffect, useState, useRef } from "react";
