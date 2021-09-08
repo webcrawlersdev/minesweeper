@@ -86,13 +86,12 @@ export default function GameHandler({
           <Row key={`row-${i}`} className="flex gap-[2px]">
             {row.map((value, j) => (
               <Cell
-                //memoize this later to see if the entire board rerenders
                 key={`cell-${i}-${j}`}
                 value={value}
                 isRevealed={isThisCellRevealed[i][j]}
                 handleReveal={() => revealCell(i, j, board, board[i][j])}
-                handleBomb={(coords) => {
-                  console.log(`dang, ${coords[0]}-${coords[1]} was a bomb`);
+                handleBomb={() => {
+                  console.log(`dang, ${i}-${j} was a bomb`);
                 }}
               />
             ))}
