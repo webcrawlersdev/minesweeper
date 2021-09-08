@@ -101,6 +101,11 @@ const Cell = styled("div", {
   width: "100%",
   height: "100%",
   color: "$text",
+  userSelect: "none",
+
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 
   transitionDuration: "150ms",
   transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
