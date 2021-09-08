@@ -60,7 +60,17 @@ export default function NewCell({
         }}
         // Style this, make the style reactive to cellState
       >
-        {isRevealed ? (value === 9 ? "*" : value > 0 && value) : " "}
+        {isRevealed ? (
+          value === 9 ? (
+            "*"
+          ) : (
+            value > 0 && value
+          )
+        ) : isFlagged ? (
+          <ExclamationTriangleIcon width="30" height="30" />
+        ) : (
+          " "
+        )}
       </Cell>
     </Box>
   );
@@ -127,6 +137,7 @@ const Cell = styled("div", {
       flagged: {
         transform: "scale(0.8)",
         backgroundColor: "$flagged",
+        color: "$flagColor",
       },
     },
     bomb: {
@@ -148,4 +159,5 @@ const Cell = styled("div", {
 });
 
 import { useState } from "react";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "@stitches/react";
