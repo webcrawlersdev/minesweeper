@@ -20,6 +20,23 @@ export default function Home() {
     console.log(board);
   }, [board]);
 
+  // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
+  const [isThisCellRevealed, setIsThisCellRevealed] = useState(null);
+  useEffect(() => {
+    let tempArray = new Array(dimSize * dimSize).fill(false);
+    setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
+  }, [dimSize, board]);
+
+  useEffect(() => {
+    if (!isThisCellRevealed) {
+      return;
+    }
+
+    // console.table(isThisCellRevealed);
+  }, [isThisCellRevealed]);
+
+  const revealedCells = useRef([]);
+
   //animation/gesture stuff bellow
   const target = useRef(null);
 
@@ -70,6 +87,9 @@ export default function Home() {
             }}
           >
             <GameHandler
+              isThisCellRevealed={isThisCellRevealed}
+              setIsThisCellRevealed={setIsThisCellRevealed}
+              revealedCells={revealedCells}
               board={board}
               bombNumber={bombNumber}
               dimSize={dimSize}
@@ -112,3 +132,4 @@ import { useSpring, animated } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
 import { styled } from "@stitches/react";
 import { darkTheme } from "../stitches.config";
+import { singleToMultiDimentionalArray } from "../lib/utils";

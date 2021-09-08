@@ -5,28 +5,17 @@ export default function GameHandler({
   board,
   dimSize,
   bombNumber,
+  isThisCellRevealed,
+  setIsThisCellRevealed,
+  revealedCells,
 }: {
   board: number[][];
   dimSize: number;
   bombNumber: number;
+  isThisCellRevealed: any;
+  setIsThisCellRevealed: any;
+  revealedCells: any;
 }) {
-  // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
-  const [isThisCellRevealed, setIsThisCellRevealed] = useState(null);
-  useEffect(() => {
-    let tempArray = new Array(dimSize * dimSize).fill(false);
-    setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
-  }, [dimSize, board]);
-
-  useEffect(() => {
-    if (!isThisCellRevealed) {
-      return;
-    }
-
-    // console.table(isThisCellRevealed);
-  }, [isThisCellRevealed]);
-
-  const revealedCells = useRef([]);
-
   const revealCell = (row, col, board, value) => {
     revealedCells.current.push(`${row}-${col}`);
     // Send if this was a bomb or not to the game handler
@@ -130,8 +119,6 @@ const Row = styled("div", {
   },
 });
 
-import { useRef, useEffect, useState } from "react";
 import Cell from "./NewCell";
 
-import { singleToMultiDimentionalArray } from "../lib/utils";
 import { styled } from "@stitches/react";
