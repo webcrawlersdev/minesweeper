@@ -8,8 +8,8 @@ export default function NewCell({
 }: {
   value: number;
   isRevealed: boolean;
-  handleBomb: any;
-  handleReveal: any;
+  handleBomb: () => void;
+  handleReveal: () => void;
 }) {
   const [isFlagged, setIsFlagged] = useState(false);
   //The cell should handle itself entirely.
