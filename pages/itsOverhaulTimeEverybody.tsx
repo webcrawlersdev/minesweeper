@@ -52,8 +52,11 @@ export default function Home() {
       target: target,
       eventOptions: { passive: false },
       drag: { from: () => [style.x.get(), style.y.get()], filterTaps: true },
-      pinch: { bounds: { min: 0.2, max: 2 }, rubberband: true },
-      wheel: { bounds: { min: 0.2, max: 2 }, rubberband: true },
+      pinch: { scaleBounds: { min: 0.1, max: 10 }, rubberband: true },
+      wheel: {
+        bounds: { left: -700, right: 700, top: -700, bottom: 700 },
+        rubberband: true,
+      },
     }
   );
 
