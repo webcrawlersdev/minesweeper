@@ -121,4 +121,4 @@ const Row = styled("div", {
 
 import Cell from "./NewCell";
 
-import { styled } from "@stitches/react";
+import { styled } from "../stitches.config";
