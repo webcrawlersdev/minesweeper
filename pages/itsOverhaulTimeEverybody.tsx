@@ -81,7 +81,11 @@ export default function Home() {
   );
 
   return (
-    <Box className={darkTheme} ref={target} css={{ touchAction: "none" }}>
+    <GameContainer
+      className={darkTheme}
+      ref={target}
+      css={{ touchAction: "none" }}
+    >
       {!board ? (
         <div>
           Tutorial stuff
@@ -115,11 +119,13 @@ export default function Home() {
           </Ui>
         </>
       )}
-    </Box>
+    </GameContainer>
   );
 }
 
-const Box = styled("div", {
+const Box = styled("div");
+
+const GameContainer = styled("div", {
   position: "relative",
 
   display: "flex",
