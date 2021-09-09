@@ -1,4 +1,4 @@
-export default function ({ children, targetRef }) {
+export default function GestureContainer({ children, targetRef }) {
   const [style, api] = useSpring(() => ({
     x: 0,
     y: 0,
