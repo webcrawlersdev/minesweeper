@@ -10,7 +10,7 @@ import {
 // Spread the scales in your light and dark themes
 import { createStitches } from "@stitches/react";
 
-export const { createTheme, theme } = createStitches({
+export const { createTheme, theme, styled, css } = createStitches({
   theme: {
     colors: {
       background: mauve.mauve1,
