@@ -7,6 +7,12 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+        <style
+          // from https://stitches.dev/docs/server-side-rendering
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
       </Head>
       <Component {...pageProps} />
     </>
@@ -21,3 +27,4 @@ const globalStyles = globalCss({
 
 import Head from "next/head";
 import { globalCss } from "@stitches/react";
+import { getCssText } from "../stitches.config";
