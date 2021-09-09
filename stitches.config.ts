@@ -17,8 +17,8 @@ export const { createTheme, theme } = createStitches({
 
       border: mauve.mauve6,
       revealed: "transparent",
-      hidden: crimson.crimson9,
-      hiddenFocus: crimson.crimson10,
+      primary: crimson.crimson9,
+      primaryFocus: crimson.crimson10,
       flagged: mauve.mauve10,
       flagColor: "$background",
       bombBackground: red.red8,
@@ -33,8 +33,8 @@ export const darkTheme = createTheme({
 
     border: mauveDark.mauve6,
     revealed: "transparent",
-    hidden: crimsonDark.crimson9,
-    hiddenFocus: crimsonDark.crimson10,
+    primary: crimsonDark.crimson9,
+    primaryFocus: crimsonDark.crimson10,
     flagged: mauveDark.mauve10,
     flagColor: "$background",
     bombBackground: redDark.red8,

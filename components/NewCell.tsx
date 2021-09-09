@@ -88,12 +88,12 @@ const reveal = keyframes({
   "0%": {
     transform: "scale(1)",
     color: "transparent",
-    backgroundColor: "$hidden",
+    backgroundColor: "$primary",
   },
   "50%": {
     transform: "scale(1.3)",
     color: "transparent",
-    backgroundColor: "$hidden",
+    backgroundColor: "$primary",
   },
   "100%": { transform: "scale(.9)", color: "$text" },
 });
@@ -127,11 +127,11 @@ const Cell = styled("div", {
         cursor: "pointer",
         transform: "scale(1.1)",
         borderRadius: "3px",
-        backgroundColor: "$hidden",
+        backgroundColor: "$primary",
 
         "&:focus": {
           transform: "scale(1)",
-          backgroundColor: "$hiddenFocus",
+          backgroundColor: "$primaryFocus",
         },
       },
       flagged: {
