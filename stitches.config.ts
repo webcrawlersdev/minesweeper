@@ -10,22 +10,23 @@ import {
 // Spread the scales in your light and dark themes
 import { createStitches } from "@stitches/react";
 
-export const { createTheme, theme, styled, css, getCssText } = createStitches({
-  theme: {
-    colors: {
-      background: mauve.mauve1,
+export const { createTheme, theme, styled, css, getCssText, globalCss } =
+  createStitches({
+    theme: {
+      colors: {
+        background: mauve.mauve1,
 
-      border: mauve.mauve6,
-      revealed: "transparent",
-      primary: crimson.crimson9,
-      primaryFocus: crimson.crimson10,
-      flagged: mauve.mauve10,
-      flagColor: "$background",
-      bombBackground: red.red8,
-      text: crimson.crimson12,
+        border: mauve.mauve6,
+        revealed: "transparent",
+        primary: crimson.crimson9,
+        primaryFocus: crimson.crimson10,
+        flagged: mauve.mauve10,
+        flagColor: "$background",
+        bombBackground: red.red8,
+        text: crimson.crimson12,
+      },
     },
-  },
-});
+  });
 
 export const darkTheme = createTheme({
   colors: {
