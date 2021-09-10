@@ -14,7 +14,15 @@ export const { createTheme, theme, styled, css, getCssText, globalCss } =
   createStitches({
     theme: {
       colors: {
+        ...mauve,
+        ...crimson,
+
         background: mauve.mauve1,
+        subtleBackground: mauve.mauve2,
+        uiElementBackground: mauve.mauve3,
+        hoveredUiElementBackground: mauve.mauve4,
+        uiElementBorder: "$mauve6",
+        hoveredUiElementBorder: "$mauve7",
 
         border: mauve.mauve6,
         revealed: "transparent",
@@ -30,7 +38,16 @@ export const { createTheme, theme, styled, css, getCssText, globalCss } =
 
 export const darkTheme = createTheme({
   colors: {
+    ...mauveDark,
+    ...crimsonDark,
+
     background: mauveDark.mauve1,
+    subtleBackground: mauveDark.mauve2,
+    uiElementBackground: mauveDark.mauve3,
+    hoveredUiElementBackground: mauveDark.mauve4,
+    activeUiElementBackground: "$mauve5",
+    uiElementBorder: "$mauve6",
+    hoveredUiElementBorder: "$mauve7",
 
     border: mauveDark.mauve6,
     revealed: "transparent",
