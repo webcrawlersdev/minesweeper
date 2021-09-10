@@ -14,7 +14,16 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 
 const globalStyles = globalCss({
-  body: { overflow: "hidden" },
+  "*": {
+    boxSizing: "border-box",
+  },
+
+  body: {
+    overflow: "hidden",
+    minHeight: "100vh",
+    backgroundColor: "$background",
+    margin: 0,
+  },
 
   // Normalizing button
   button: {
@@ -41,4 +50,4 @@ const globalStyles = globalCss({
 });
 
 import Head from "next/head";
-import { globalCss } from "@stitches/react";
+import { globalCss } from "../stitches.config";
