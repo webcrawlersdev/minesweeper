@@ -113,15 +113,19 @@ const Cell = styled("div", {
   alignItems: "center",
   justifyContent: "center",
 
-  transitionDuration: "150ms",
-  transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+  "@media (prefers-reduced-motion: no-preference)": {
+    transitionDuration: "150ms",
+    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
 
-  animationTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+    animationTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+  },
 
   variants: {
     variant: {
       revealed: {
-        animation: `${reveal} 240ms`,
+        "@media (prefers-reduced-motion: no-preference)": {
+          animation: `${reveal} 240ms`,
+        },
       },
       hidden: {
         cursor: "pointer",
