@@ -7,6 +7,7 @@ if (typeof document != "undefined") {
 }
 
 export default function Home() {
+  // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
 
   let bombNumber = 40;
@@ -30,6 +31,13 @@ export default function Home() {
     setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
   }, [dimSize, board]);
 
+  // make a bidimentional array the same size of board, This will be used and reseted to set staggers to the cell animations;
+  const [cellStaggerValues, setCellStaggerValues] = useState(null);
+  useEffect(() => {
+    let tempArray = new Array(dimSize * dimSize).fill(0);
+    setCellStaggerValues(singleToMultiDimentionalArray(tempArray, dimSize));
+  }, [dimSize, board]);
+
   useEffect(() => {
     if (!isThisCellRevealed) {
       return;
@@ -40,90 +48,78 @@ export default function Home() {
 
   const revealedCells = useRef([]);
 
-  //animation/gesture stuff bellow
+  //animation/gesture stuff
   const target = useRef(null);
 
-  const [style, api] = useSpring(() => ({
-    x: 0,
-    y: 0,
-    scale: 1,
-  }));
-
-  useGesture(
-    {
-      onDrag: ({ pinching, cancel, offset: [x, y], ...rest }) => {
-        if (pinching) return cancel();
-        api.start({ x, y });
-      },
-      onPinch: ({ origin: [ox, oy], first, offset: [s], memo }) => {
-        if (first) {
-          const { width, height, x, y } =
-            target.current.getBoundingClientRect();
-          const tx = ox - (x + width / 2);
-          const ty = oy - (y + height / 2);
-          memo = [style.x.get(), style.y.get(), tx, ty];
-        }
-        api.start({ scale: s });
-        return memo;
-      },
-      onWheel: ({ offset: [, s] }) => api.start({ scale: 1 + s / 1200 }),
-    },
-    {
-      target: target,
-      eventOptions: { passive: false },
-      drag: { from: () => [style.x.get(), style.y.get()], filterTaps: true },
-      pinch: { scaleBounds: { min: 0.1, max: 10 }, rubberband: true },
-      wheel: {
-        bounds: { left: -700, right: 700, top: -700, bottom: 700 },
-        rubberband: true,
-      },
-    }
-  );
+  //Dialog stuff
+  const [open, setOpen] = useState(false);
 
   return (
-    <GameContainer
-      className={darkTheme}
-      ref={target}
-      css={{ touchAction: "none" }}
+    <Box
+      css={{
+        position: "relative",
+        height: "100vh",
+      }}
     >
-      {!board ? (
-        <div>
-          Tutorial stuff
-          <br />
-          <button onClick={startNewGame}>Start game {">"}</button>
-        </div>
-      ) : (
-        <>
-          <Ui css={{ top: "5%", left: "2rem" }}>
-            <button onClick={startNewGame}>Start new game</button>
-          </Ui>
-          <animated.div
-            style={{
-              ...style,
-            }}
-          >
-            <GameHandler
-              isThisCellRevealed={isThisCellRevealed}
-              setIsThisCellRevealed={setIsThisCellRevealed}
-              revealedCells={revealedCells}
-              board={board}
-              bombNumber={bombNumber}
-              dimSize={dimSize}
-            />
-          </animated.div>
-          <Ui css={{ bottom: "2rem" }}>
-            <div>
-              bombNumber: {bombNumber} <br />
-              dimSize: {dimSize}
-            </div>
-          </Ui>
-        </>
-      )}
-    </GameContainer>
+      <UiBar>Hej do</UiBar>
+      <GameContainer ref={target} css={{ touchAction: "none" }}>
+        {!board ? (
+          <div>
+            Tutorial stuff
+            <br />
+            <button onClick={startNewGame}>Start game {">"}</button>
+          </div>
+        ) : (
+          <>
+            <Ui css={{ top: "5%", left: "2rem" }}>
+              <button onClick={startNewGame}>Start new game</button>
+              <br />
+              <button
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
+                Open dialog
+              </button>
+            </Ui>
+            <GestureContainer targetRef={target}>
+              <GameHandler
+                cellStaggerValues={cellStaggerValues}
+                setCellStaggerValues={setCellStaggerValues}
+                isThisCellRevealed={isThisCellRevealed}
+                setIsThisCellRevealed={setIsThisCellRevealed}
+                revealedCells={revealedCells}
+                board={board}
+                bombNumber={bombNumber}
+                dimSize={dimSize}
+              />
+            </GestureContainer>
+            <Ui css={{ bottom: "2rem" }}>
+              <div>
+                bombNumber: {bombNumber} <br />
+                dimSize: {dimSize}
+              </div>
+            </Ui>
+          </>
+        )}
+        {open && (
+          <GameEndDialog playerWon={true} onClose={() => setOpen(false)} />
+        )}
+      </GameContainer>
+      <UiBar></UiBar>
+    </Box>
   );
 }
 
 const Box = styled("div");
+
+const UiBar = styled(Box, {
+  position: "relative",
+  height: "10%",
+  width: "100%",
+  background: "$background",
+  zIndex: "10",
+});
 
 const GameContainer = styled("div", {
   position: "relative",
@@ -133,7 +129,7 @@ const GameContainer = styled("div", {
   alignItems: "center",
 
   backgroundColor: "$background",
-  height: "100vh",
+  height: "80%",
 
   color: "$text",
 });
@@ -146,8 +142,9 @@ const Ui = styled("div", {
 import { useEffect, useState, useRef } from "react";
 import GameHandler from "../components/GameHandler";
 import { createBoardWithJustNumbers } from "../lib/utils";
-import { useSpring, animated } from "@react-spring/web";
-import { useGesture } from "@use-gesture/react";
-import { styled } from "@stitches/react";
+
+import { styled } from "../stitches.config";
 import { darkTheme } from "../stitches.config";
 import { singleToMultiDimentionalArray } from "../lib/utils";
+import { GameEndDialog } from "../components/GameEndDialog";
+import GestureContainer from "../components/GestureContainer";

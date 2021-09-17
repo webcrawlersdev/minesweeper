@@ -6,22 +6,35 @@ export default function GameHandler({
   dimSize,
   bombNumber,
   isThisCellRevealed,
+  cellStaggerValues,
+  setCellStaggerValues,
   setIsThisCellRevealed,
   revealedCells,
 }: {
   board: number[][];
   dimSize: number;
   bombNumber: number;
+  cellStaggerValues: number[][];
+  setCellStaggerValues: any;
   isThisCellRevealed: any;
   setIsThisCellRevealed: any;
   revealedCells: any;
 }) {
+  let staggerStep = useRef(0);
   const revealCell = (row, col, board, value) => {
     revealedCells.current.push(`${row}-${col}`);
-    // Send if this was a bomb or not to the game handler
-    let tempArray = [...isThisCellRevealed];
-    tempArray[row][col] = true;
-    setIsThisCellRevealed(tempArray);
+    let revealedTempArray = [...isThisCellRevealed];
+    revealedTempArray[row][col] = true;
+    setIsThisCellRevealed(revealedTempArray);
+
+    let staggerTempArray = [...cellStaggerValues];
+    staggerTempArray[row][col] = staggerStep.current;
+    setCellStaggerValues(staggerTempArray);
+    if (staggerStep.current < 20) {
+      staggerStep.current = staggerStep.current + 2;
+    } else {
+      staggerStep.current = staggerStep.current + 1;
+    }
 
     switch (value) {
       case 0: //this was an empty cell
@@ -46,7 +59,7 @@ export default function GameHandler({
                   )
                 ) {
                   console.log(
-                    `Running revealCell on ${checking_row}-${checking_col}`
+                    `Running revealCell on ${checking_row}-${checking_col}, stagger value is = ${staggerTempArray[checking_row][checking_row]}`
                   );
                   revealCell(
                     checking_row,
@@ -78,7 +91,11 @@ export default function GameHandler({
                 key={`cell-${i}-${j}`}
                 value={value}
                 isRevealed={isThisCellRevealed[i][j]}
-                handleReveal={() => revealCell(i, j, board, board[i][j])}
+                staggerValue={cellStaggerValues[i][j]}
+                handleReveal={() => {
+                  staggerStep.current = 0;
+                  revealCell(i, j, board, board[i][j]);
+                }}
                 handleBomb={() => {
                   console.log(`dang, ${i}-${j} was a bomb`);
                 }}
@@ -122,3 +139,4 @@ const Row = styled("div", {
 import Cell from "./NewCell";
 
 import { styled } from "../stitches.config";
+import { useRef } from "react";

@@ -4,10 +4,12 @@ export default function NewCell({
   value,
   isRevealed,
   handleBomb,
+  staggerValue,
   handleReveal,
 }: {
   value: number;
   isRevealed: boolean;
+  staggerValue: number;
   handleBomb: () => void;
   handleReveal: () => void;
 }) {
@@ -43,6 +45,10 @@ export default function NewCell({
   return (
     <Box>
       <Cell
+        css={{
+          animationDelay: `${staggerValue}ms`,
+          transitionDelay: `${staggerValue}ms`,
+        }}
         variant={isRevealed ? "revealed" : isFlagged ? "flagged" : "hidden"}
         style={{ WebkitTapHighlightColor: "transparent" }}
         tabIndex={0}
