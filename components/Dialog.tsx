@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { css } from "@stitches/react";
+import { darkTheme, css } from "../stitches.config";
 
 export const Dialog = ({ onClose, ...props }) => {
   const ref = useRef(null);
@@ -21,18 +21,27 @@ export const Dialog = ({ onClose, ...props }) => {
   });
 
   return ReactDOM.createPortal(
-    <div {...props} ref={ref} className={props.className + " " + dialog()} />,
+    <div
+      {...props}
+      ref={ref}
+      className={darkTheme + " " + props.className + " " + dialog()}
+    />,
     document.body
   );
 };
 
 const dialog = css({
   position: "fixed",
+  zIndex: "9999",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-  background: "#fff",
+  background: "$background",
+  border: "1px solid $border",
+
+  color: "$text",
+
   borderRadius: 4,
   padding: 20,
 });
