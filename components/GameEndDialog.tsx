@@ -1,4 +1,4 @@
-export const GameEndDialog = ({ playerWon, onClose }) => (
+export const GameEndDialog = ({ playerWon, onClose, handleReset }) => (
   <Dialog className={dialog()} onClose={onClose}>
     <h2 className={heading()}>
       {playerWon ? "Congratulations!" : "Game over!"}
@@ -13,7 +13,8 @@ export const GameEndDialog = ({ playerWon, onClose }) => (
       <Button
         outlined
         onClick={() => {
-          console.log("hej");
+          handleReset();
+          onClose();
         }}
       >
         Try again
