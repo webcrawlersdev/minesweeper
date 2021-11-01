@@ -2,6 +2,7 @@
 
 // https://v10-beta--use-gesture.netlify.app/docs/gestures/#about-the-pinch-gesture
 if (typeof document != "undefined") {
+  //  Should probably wrap this in a useEffect so I can clean when re rendering
   document.addEventListener("gesturestart", (e) => e.preventDefault());
   document.addEventListener("gesturechange", (e) => e.preventDefault());
 }
