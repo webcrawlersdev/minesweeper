@@ -91,6 +91,7 @@ export default function GameHandler({
     // Check if the player won by revealing this
     if (
       value != 9 &&
+      gameState != boardStateEnum.LOST &&
       revealedCells.current.length == dimSize * dimSize - bombNumber
     ) {
       win();
