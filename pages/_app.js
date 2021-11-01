@@ -16,6 +16,9 @@ export default MyApp;
 const globalStyles = globalCss({
   "*": {
     boxSizing: "border-box",
+    margin: 0,
+    padding: 0,
+    userSelect: "none",
   },
 
   body: {
