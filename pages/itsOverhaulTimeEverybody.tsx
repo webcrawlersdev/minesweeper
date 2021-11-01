@@ -56,6 +56,7 @@ export default function Home() {
 
   return (
     <Box
+      className={darkTheme}
       css={{
         position: "relative",
         height: "100vh",
