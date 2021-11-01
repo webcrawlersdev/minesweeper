@@ -13,7 +13,7 @@ export default function Home() {
   // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
 
-  let bombNumber = 1;
+  let bombNumber = 10;
   let dimSize = 5;
 
   useEffect(() => {
@@ -57,6 +57,13 @@ export default function Home() {
 
   //Dialog stuff
   const [open, setOpen] = useState(false);
+
+  // show dialog when win/lose
+  useEffect(() => {
+    if (gameState == boardStateEnum.LOST || gameState == boardStateEnum.WON) {
+      setOpen(true);
+    }
+  }, [gameState]);
 
   return (
     <Box
@@ -109,7 +116,11 @@ export default function Home() {
           </>
         )}
         {open && (
-          <GameEndDialog playerWon={true} onClose={() => setOpen(false)} />
+          <GameEndDialog
+            handleReset={startNewGame}
+            playerWon={gameState == boardStateEnum.WON}
+            onClose={() => setOpen(false)}
+          />
         )}
       </GameContainer>
       <UiBar></UiBar>
@@ -155,3 +166,4 @@ import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
 import { useGameStateStore } from "../lib/store";
+import { boardStateEnum } from "../lib/boardStateEnum";
