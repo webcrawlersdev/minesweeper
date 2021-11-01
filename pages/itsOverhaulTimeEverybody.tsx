@@ -7,11 +7,14 @@ if (typeof document != "undefined") {
 }
 
 export default function Home() {
+  // set up variable to track game state
+  const { gameState, reset } = useGameStateStore();
+
   // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
 
-  let bombNumber = 40;
-  let dimSize = 22;
+  let bombNumber = 1;
+  let dimSize = 5;
 
   useEffect(() => {
     console.log(board);
@@ -22,6 +25,7 @@ export default function Home() {
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
     let tempArray = new Array(dimSize * dimSize).fill(false);
     setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
+    reset();
   };
 
   // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
@@ -73,6 +77,7 @@ export default function Home() {
         ) : (
           <>
             <Ui css={{ top: "5%", left: "2rem" }}>
+              <p>GameState: {gameState}</p>
               <button onClick={startNewGame}>Start new game</button>
               <br />
               <button
@@ -149,3 +154,4 @@ import { darkTheme } from "../stitches.config";
 import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
+import { useGameStateStore } from "../lib/store";

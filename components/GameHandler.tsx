@@ -20,11 +20,20 @@ export default function GameHandler({
   setIsThisCellRevealed: any;
   revealedCells: any;
 }) {
+  const { gameState, lose, start, win } = useGameStateStore();
+
   let staggerStep = useRef(0);
   const revealCell = (row, col, board, value) => {
+    // If game was pristine, set it to started
+    if (gameState === boardStateEnum.PRISTINE) {
+      start();
+    }
+
     revealedCells.current.push(`${row}-${col}`);
     let revealedTempArray = [...isThisCellRevealed];
     revealedTempArray[row][col] = true;
+
+    // This is VERY inneficient, I'm setting the entire board every time a cell is revealed. There should be a way to only update the cells that change and not cause a render in the entire baord.
     setIsThisCellRevealed(revealedTempArray);
 
     let staggerTempArray = [...cellStaggerValues];
@@ -58,9 +67,9 @@ export default function GameHandler({
                     (element) => element == `${checking_row}-${checking_col}`
                   )
                 ) {
-                  console.log(
-                    `Running revealCell on ${checking_row}-${checking_col}, stagger value is = ${staggerTempArray[checking_row][checking_row]}`
-                  );
+                  // console.log(
+                  //   `Running revealCell on ${checking_row}-${checking_col}, stagger value is = ${staggerTempArray[checking_row][checking_row]}`
+                  // );
                   revealCell(
                     checking_row,
                     checking_col,
@@ -72,12 +81,19 @@ export default function GameHandler({
             }
           }
         }
-
         break;
-
       case 9: //this was a bomb
         console.log(`dang, ${row}-${col} was a bomb`);
+        lose();
         break;
+    }
+
+    // Check if the player won by revealing this
+    if (
+      value != 9 &&
+      revealedCells.current.length == dimSize * dimSize - bombNumber
+    ) {
+      win();
     }
   };
 
@@ -97,7 +113,7 @@ export default function GameHandler({
                   revealCell(i, j, board, board[i][j]);
                 }}
                 handleBomb={() => {
-                  console.log(`dang, ${i}-${j} was a bomb`);
+                  console.log(`Hej do`);
                 }}
               />
             ))}
@@ -140,3 +156,5 @@ import Cell from "./NewCell";
 
 import { styled } from "../stitches.config";
 import { useRef } from "react";
+import { useGameStateStore } from "../lib/store";
+import { boardStateEnum } from "../lib/boardStateEnum";
