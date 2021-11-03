@@ -13,6 +13,13 @@ export default function NewCell({
   handleBomb: () => void;
   handleReveal: () => void;
 }) {
+  const { gameState } = useGameStateStore();
+  useEffect(() => {
+    if (gameState == boardStateEnum.PRISTINE) {
+      setIsFlagged(false);
+    }
+  }, [gameState]);
+
   const [isFlagged, setIsFlagged] = useState(false);
   //The cell should handle itself entirely.
 
@@ -168,6 +175,8 @@ const Cell = styled("div", {
   ],
 });
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "@stitches/react";
+import { useGameStateStore } from "../lib/store";
+import { boardStateEnum } from "../lib/boardStateEnum";
