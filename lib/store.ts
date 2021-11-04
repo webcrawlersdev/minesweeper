@@ -8,3 +8,10 @@ export const useGameStateStore = create((set) => ({
   lose: () => set({ gameState: boardStateEnum.LOST }),
   win: () => set({ gameState: boardStateEnum.WON }),
 }));
+
+export const useTimerStore = create((set) => ({
+  timer: 0,
+  increaseTimerBy: (by: number) =>
+    set((state: { timer: number }) => ({ timer: state.timer + by })),
+  resetTimer: () => set({ timer: 0 }),
+}));

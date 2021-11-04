@@ -97,6 +97,8 @@ export default function Home() {
           >
             Hej do
           </button>
+
+          {gameState !== boardStateEnum.PRISTINE && <Timer />}
         </Bar>
         {!board ? (
           <div>
@@ -165,6 +167,7 @@ import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
+import Timer from "../components/Timer";
 import { useGameStateStore } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
 import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";
