@@ -116,7 +116,7 @@ const Cell = styled("div", {
   position: "relative",
   zIndex: "1",
 
-  borderRadius: "4px",
+  borderRadius: "2px",
   width: "100%",
   height: "100%",
   color: "$text",
@@ -169,7 +169,7 @@ const Cell = styled("div", {
       css: {
         transform: "scale(0.8)",
         backgroundColor: "$bombBackground",
-        borderRadius: "3px",
+        borderRadius: "2px",
       },
     },
   ],
