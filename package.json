@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@modulz/radix-icons": "^4.0.0",
     "@radix-ui/colors": "^0.1.7",
     "@radix-ui/react-icons": "^1.0.3",
     "@react-spring/web": "^9.2.4",
