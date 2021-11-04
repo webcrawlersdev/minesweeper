@@ -14,11 +14,16 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 
 const globalStyles = globalCss({
+  "@font-face": {
+    fontFamily: "IBM Plex Mono",
+  },
+
   "*": {
     boxSizing: "border-box",
     margin: 0,
     padding: 0,
     userSelect: "none",
+    fontFamily: "IBM Plex Mono",
   },
 
   body: {
