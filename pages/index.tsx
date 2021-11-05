@@ -10,12 +10,14 @@ if (typeof document != "undefined") {
 export default function Home() {
   // set up variable to track game state
   const { gameState, reset } = useGameStateStore();
+  // set up variables to track game difficulty
+  const { difficulty } = useDifficultyStore();
+  const { dimSize, bombNumber } = difficulty;
+  // we need this to reset the game
+  const { resetTimer } = useTimerStore();
 
   // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
-
-  let bombNumber = 10;
-  let dimSize = 9;
 
   useEffect(() => {
     console.log(board);
@@ -26,6 +28,7 @@ export default function Home() {
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
     let tempArray = new Array(dimSize * dimSize).fill(false);
     setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
+    resetTimer();
     reset();
   };
 
@@ -98,17 +101,17 @@ export default function Home() {
             Hej do
           </button>
 
-          {gameState !== boardStateEnum.PRISTINE && <Timer />}
+          <Timer />
         </Bar>
         {!board ? (
           <div>
-            Tutorial stuff
+            <DifficultySelector />
             <br />
             <button
               style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               onClick={startNewGame}
             >
-              START <PlayIcon />
+              START GAME <PlayIcon />
             </button>
           </div>
         ) : (
@@ -168,6 +171,11 @@ import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
 import Timer from "../components/Timer";
-import { useGameStateStore } from "../lib/store";
+import DifficultySelector from "components/DifficultySelector";
+import {
+  useDifficultyStore,
+  useGameStateStore,
+  useTimerStore,
+} from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
 import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";

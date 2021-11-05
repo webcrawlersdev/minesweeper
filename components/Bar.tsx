@@ -16,6 +16,12 @@ const Bar = styled("div", {
   background: "$mauve2",
   borderTop: "1px solid $colors$mauve6",
 
+  "@motion": {
+    transitionDuration: "240ms",
+    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+    willChange: "height",
+  },
+
   variants: {
     expanded: {
       true: {
