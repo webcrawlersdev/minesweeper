@@ -126,7 +126,7 @@ const Cell = styled("div", {
   alignItems: "center",
   justifyContent: "center",
 
-  "@media (prefers-reduced-motion: no-preference)": {
+  "@motion": {
     transitionDuration: "150ms",
     transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
 
@@ -136,7 +136,7 @@ const Cell = styled("div", {
   variants: {
     variant: {
       revealed: {
-        "@media (prefers-reduced-motion: no-preference)": {
+        "@motion": {
           animation: `${reveal} 240ms`,
         },
       },
@@ -177,6 +177,6 @@ const Cell = styled("div", {
 
 import { useEffect, useState } from "react";
 import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
-import { styled, keyframes } from "@stitches/react";
+import { styled, keyframes } from "stitches.config";
 import { useGameStateStore } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";

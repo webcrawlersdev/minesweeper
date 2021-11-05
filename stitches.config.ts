@@ -10,31 +10,42 @@ import {
 // Spread the scales in your light and dark themes
 import { createStitches } from "@stitches/react";
 
-export const { createTheme, theme, styled, css, getCssText, globalCss } =
-  createStitches({
-    theme: {
-      colors: {
-        ...mauve,
-        ...crimson,
+export const {
+  styled,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  theme,
+  createTheme,
+  config,
+} = createStitches({
+  theme: {
+    colors: {
+      ...mauve,
+      ...crimson,
 
-        background: mauve.mauve1,
-        subtleBackground: mauve.mauve2,
-        uiElementBackground: mauve.mauve3,
-        hoveredUiElementBackground: mauve.mauve4,
-        uiElementBorder: "$mauve6",
-        hoveredUiElementBorder: "$mauve7",
+      background: mauve.mauve1,
+      subtleBackground: mauve.mauve2,
+      uiElementBackground: mauve.mauve3,
+      hoveredUiElementBackground: mauve.mauve4,
+      uiElementBorder: "$mauve6",
+      hoveredUiElementBorder: "$mauve7",
 
-        border: mauve.mauve6,
-        revealed: "transparent",
-        primary: crimson.crimson9,
-        primaryFocus: crimson.crimson10,
-        flagged: mauve.mauve10,
-        flagColor: "$background",
-        bombBackground: red.red8,
-        text: crimson.crimson12,
-      },
+      border: mauve.mauve6,
+      revealed: "transparent",
+      primary: crimson.crimson9,
+      primaryFocus: crimson.crimson10,
+      flagged: mauve.mauve10,
+      flagColor: "$background",
+      bombBackground: red.red8,
+      text: crimson.crimson12,
     },
-  });
+  },
+  media: {
+    motion: "(prefers-reduced-motion: no-preference)",
+  },
+});
 
 export const darkTheme = createTheme({
   colors: {
