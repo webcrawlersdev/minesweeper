@@ -81,6 +81,38 @@ export default function Home() {
       }}
     >
       <GameContainer ref={target} css={{ touchAction: "none" }}>
+        {board && (
+          <Box
+            css={{
+              position: "fixed",
+              top: "1rem",
+              zIndex: "10",
+              width: "100%",
+
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              css={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "0.5rem",
+
+                backgroundColor: "$mauve3",
+                padding: "0.5rem",
+                borderRadius: "3px",
+                borderWidth: "1px",
+                borderStyle: "solid",
+                borderColor: "$mauve6",
+              }}
+            >
+              <StopwatchIcon />
+              <Timer />
+            </Box>
+          </Box>
+        )}
         <Bar expanded={isExpanded}>
           <button
             onClick={() => {
@@ -100,8 +132,6 @@ export default function Home() {
           >
             Hej do
           </button>
-
-          <Timer />
         </Bar>
         {!board ? (
           <div>
@@ -178,4 +208,4 @@ import {
   useTimerStore,
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
-import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";
+import { PlayIcon, ReloadIcon, StopwatchIcon } from "@modulz/radix-icons";
