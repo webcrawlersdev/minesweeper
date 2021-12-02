@@ -73,7 +73,7 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
     backgroundColor: "$mauve4",
   },
   "&:focus": {
-    $$borderColor: "$colors$crimson7",
+    $$borderColor: "$colors$crimson8",
     backgroundColor: "$mauve5",
     outline: "none",
   },
@@ -87,7 +87,7 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
         $$borderWidth: "2px",
         backgroundColor: "$mauve5",
 
-        "&:hover": { $$borderColor: "$colors$crimson7" },
+        "&:hover": { $$borderColor: "$colors$crimson8" },
       },
     },
   },
