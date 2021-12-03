@@ -13,6 +13,8 @@ export default function NewCell({
   handleBomb: () => void;
   handleReveal: () => void;
 }) {
+  const { currentTool } = useToolStore();
+
   const { gameState } = useGameStateStore();
   useEffect(() => {
     if (gameState == boardStateEnum.PRISTINE) {
@@ -49,6 +51,24 @@ export default function NewCell({
     console.log("Handling flag");
   };
 
+  const handlePrimaryAction = () => {
+    if (currentTool === toolOptionsEnum.DIG) {
+      reveal();
+    }
+    if (currentTool === toolOptionsEnum.FLAG) {
+      handleFlag();
+    }
+  };
+
+  const handleSecondaryAction = () => {
+    if (currentTool === toolOptionsEnum.DIG) {
+      handleFlag();
+    }
+    if (currentTool === toolOptionsEnum.FLAG) {
+      reveal();
+    }
+  };
+
   return (
     <Box>
       <Cell
@@ -60,15 +80,15 @@ export default function NewCell({
         style={{ WebkitTapHighlightColor: "transparent" }}
         tabIndex={0}
         bomb={value === 9}
-        onClick={reveal}
+        onClick={handlePrimaryAction}
         onContextMenu={(e) => {
           e.preventDefault();
-          handleFlag();
+          handleSecondaryAction();
         }}
         onKeyDown={(e) => {
           if (e.code === "Enter" || e.code === "Space") {
             // this will most likely become a switch case when I try to handle navigation with the arrow keys
-            reveal();
+            handlePrimaryAction();
           }
         }}
         // Style this, make the style reactive to cellState
@@ -180,3 +200,4 @@ import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "stitches.config";
 import { useGameStateStore } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
+import { useToolStore, toolOptionsEnum } from "../lib/store";
