@@ -26,6 +26,7 @@ const FloatingToolSelector = () => {
 
 const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {
   position: "absolute",
+  zIndex: "10",
   bottom: "1rem",
   left: "50%",
   transform: "translate(-50%)",
