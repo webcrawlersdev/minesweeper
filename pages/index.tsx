@@ -78,38 +78,7 @@ export default function Home() {
       }}
     >
       <GameContainer ref={target} css={{ touchAction: "none" }}>
-        {board && (
-          <Box
-            css={{
-              position: "fixed",
-              top: "1rem",
-              zIndex: "10",
-              width: "100%",
-
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Box
-              css={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "0.5rem",
-
-                backgroundColor: "$mauve3",
-                padding: "0.5rem",
-                borderRadius: "3px",
-                borderWidth: "1px",
-                borderStyle: "solid",
-                borderColor: "$mauve6",
-              }}
-            >
-              <StopwatchIcon />
-              <Timer />
-            </Box>
-          </Box>
-        )}
+        {board && <FloatingTimer />}
         {!board ? (
           <div>
             <DifficultySelector />
@@ -177,12 +146,13 @@ import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
-import Timer from "../components/Timer";
 import DifficultySelector from "components/DifficultySelector";
+import FloatingTimer from "components/FloatingTimer";
+
 import {
   useDifficultyStore,
   useGameStateStore,
   useTimerStore,
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
-import { PlayIcon, ReloadIcon, StopwatchIcon } from "@modulz/radix-icons";
+import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";
