@@ -69,9 +69,6 @@ export default function Home() {
     }
   }, [gameState]);
 
-  // barStuff
-  const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <Box
       className={darkTheme}
@@ -113,26 +110,6 @@ export default function Home() {
             </Box>
           </Box>
         )}
-        <Bar expanded={isExpanded}>
-          <button
-            onClick={() => {
-              gameState !== boardStateEnum.PRISTINE && startNewGame();
-            }}
-          >
-            {gameState == boardStateEnum.PRISTINE ? (
-              <PlayIcon width="30" height="30" />
-            ) : (
-              <ReloadIcon width="30" height="30" />
-            )}
-          </button>
-          <button
-            onClick={() => {
-              setIsExpanded((prev) => !prev);
-            }}
-          >
-            Hej do
-          </button>
-        </Bar>
         {!board ? (
           <div>
             <DifficultySelector />
@@ -179,7 +156,7 @@ const GameContainer = styled("div", {
   top: "0",
   right: 0,
   width: "100%",
-  height: "calc(100% - 88px)",
+  height: "100%",
 
   display: "flex",
   justifyContent: "center",
