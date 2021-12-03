@@ -85,16 +85,7 @@ export default function Home() {
           </>
         )}
         {!board ? (
-          <div>
-            <DifficultySelector />
-            <br />
-            <button
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-              onClick={startNewGame}
-            >
-              START GAME <PlayIcon />
-            </button>
-          </div>
+          <MainMenu startNewGame={startNewGame} />
         ) : (
           <>
             <GestureContainer targetRef={target}>
@@ -151,7 +142,6 @@ import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
-import DifficultySelector from "components/DifficultySelector";
 import FloatingTimer from "components/FloatingTimer";
 import FloatingToolSelector from "components/FloatingToolSelector";
 
@@ -162,3 +152,4 @@ import {
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
 import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";
+import MainMenu from "components/MainMenu";
