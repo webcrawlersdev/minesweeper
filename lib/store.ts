@@ -51,3 +51,13 @@ export const useDifficultyStore = create<Difficulty>((set) => ({
   setToDifficulty: (newDifficulty) =>
     set(() => ({ difficulty: newDifficulty })),
 }));
+
+export const toolOptionsEnum = {
+  DIG: "DIG",
+  FLAG: "FLAG",
+};
+
+export const useToolStore = create((set) => ({
+  currentTool: toolOptionsEnum.DIG,
+  setCurrentTool: (newTool) => set(() => ({ currentTool: newTool })),
+}));

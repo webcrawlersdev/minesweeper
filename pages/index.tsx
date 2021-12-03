@@ -78,7 +78,12 @@ export default function Home() {
       }}
     >
       <GameContainer ref={target} css={{ touchAction: "none" }}>
-        {board && <FloatingTimer />}
+        {board && (
+          <>
+            <FloatingTimer />
+            <FloatingToolSelector />
+          </>
+        )}
         {!board ? (
           <div>
             <DifficultySelector />
@@ -148,6 +153,7 @@ import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
 import DifficultySelector from "components/DifficultySelector";
 import FloatingTimer from "components/FloatingTimer";
+import FloatingToolSelector from "components/FloatingToolSelector";
 
 import {
   useDifficultyStore,
