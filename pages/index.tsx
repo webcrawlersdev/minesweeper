@@ -32,6 +32,16 @@ export default function Home() {
     reset();
   };
 
+  /**
+   * This function will delete the board and clear some state to make the render the main menu instead of the game
+   */
+  const backToMenu = () => {
+    revealedCells.current = [];
+    setBoard(null);
+    resetTimer();
+    reset();
+  };
+
   // make a bidimentional array the same size of board, give cells a calback so they can update themsemves here;
   const [isThisCellRevealed, setIsThisCellRevealed] = useState(null);
   useEffect(() => {
@@ -82,6 +92,7 @@ export default function Home() {
           <>
             <FloatingTimer />
             <FloatingToolSelector />
+            <FloatingMenu backToMenu={backToMenu} startNewGame={startNewGame} />
           </>
         )}
         {!board ? (
@@ -144,6 +155,7 @@ import GestureContainer from "../components/GestureContainer";
 import Bar from "../components/Bar";
 import FloatingTimer from "components/FloatingTimer";
 import FloatingToolSelector from "components/FloatingToolSelector";
+import FloatingMenu from "components/FloatingMenu";
 
 import {
   useDifficultyStore,
@@ -151,5 +163,4 @@ import {
   useTimerStore,
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
-import { PlayIcon, ReloadIcon } from "@modulz/radix-icons";
 import MainMenu from "components/MainMenu";
