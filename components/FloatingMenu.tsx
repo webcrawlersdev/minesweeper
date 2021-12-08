@@ -5,6 +5,12 @@ const FloatingMenu = ({
   backToMenu: () => void;
   startNewGame: () => void;
 }) => {
+  useKeyboardShortcut(["Meta", "r"], startNewGame, { overrideSystem: true });
+  useKeyboardShortcut(["Control", "r"], startNewGame, { overrideSystem: true });
+
+  useKeyboardShortcut(["Meta", "m"], backToMenu, { overrideSystem: true });
+  useKeyboardShortcut(["Control", "m"], backToMenu, { overrideSystem: true });
+
   return (
     <DropdownMenu.Root>
       <DropdownMenuTrigger>
@@ -13,17 +19,11 @@ const FloatingMenu = ({
 
       <DropdownMenuContent className={darkTheme} side="right" sideOffset={8}>
         <DropdownMenuItem onSelect={backToMenu}>
-          Back to menu <RightSlot>⌘+T</RightSlot>
+          Back to menu <RightSlot>⌘+M</RightSlot>
         </DropdownMenuItem>
 
         <DropdownMenuItem onSelect={startNewGame}>
-          Restart game <RightSlot>⌘+T</RightSlot>
-        </DropdownMenuItem>
-
-        <DropdownMenu.DropdownMenuSeparator />
-
-        <DropdownMenuItem>
-          Hejdo <RightSlot>⌘+T</RightSlot>
+          Restart game <RightSlot>⌘+R</RightSlot>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu.Root>
@@ -154,3 +154,5 @@ export default FloatingMenu;
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { darkTheme, styled } from "stitches.config";
 import { HamburgerMenuIcon } from "@modulz/radix-icons";
+import { useEffect } from "react";
+import useKeyboardShortcut from "lib/hooks/useKeyboardShortcut";
