@@ -88,10 +88,10 @@ export default function NewCell({
         onKeyDown={(e) => {
           if (e.code === "Enter" || e.code === "Space") {
             // this will most likely become a switch case when I try to handle navigation with the arrow keys
+            e.preventDefault();
             handlePrimaryAction();
           }
         }}
-        // Style this, make the style reactive to cellState
       >
         {isRevealed ? (
           value === 9 ? (
