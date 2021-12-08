@@ -1,6 +1,8 @@
 import {
   mauveDark,
+  mauveDarkA,
   mauve,
+  mauveA,
   crimson,
   crimsonDark,
   red,
@@ -23,6 +25,7 @@ export const {
   theme: {
     colors: {
       ...mauve,
+      ...mauveA,
       ...crimson,
 
       background: mauve.mauve1,
@@ -50,6 +53,7 @@ export const {
 export const darkTheme = createTheme({
   colors: {
     ...mauveDark,
+    ...mauveDarkA,
     ...crimsonDark,
 
     background: mauveDark.mauve1,
