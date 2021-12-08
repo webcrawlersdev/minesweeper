@@ -22,7 +22,11 @@ const keysReducer = (state, action) => {
 /** credit: https://github.com/arthurtyukayev/use-keyboard-shortcut/blob/master/lib/useKeyboardShortcut.js
  * https://www.fullstacklabs.co/blog/keyboard-shortcuts-with-react-hooks
  */
-const useKeyboardShortcut = (shortcutKeys, callback, options) => {
+const useKeyboardShortcut = (
+  shortcutKeys: string[],
+  callback: (keys?: string[]) => void,
+  options?: { overrideSystem?: boolean }
+) => {
   if (!Array.isArray(shortcutKeys))
     throw new Error(
       "The first parameter to `useKeyboardShortcut` must be an ordered array of `KeyboardEvent.key` strings."
