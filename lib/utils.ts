@@ -162,3 +162,16 @@ export const getNumOfNeighboringBombs = (board, row, col) => {
     return " ";
   }
 };
+
+/**
+ * credit: https://github.com/arthurtyukayev/use-keyboard-shortcut/blob/master/lib/utils.js
+ */
+export function disabledEventPropagation(e) {
+  if (e) {
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    } else if (window.event) {
+      window.event.cancelBubble = true;
+    }
+  }
+}
