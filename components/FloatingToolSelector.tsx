@@ -1,6 +1,19 @@
 const FloatingToolSelector = () => {
   const { currentTool, setCurrentTool } = useToolStore();
 
+  const toggleCurrentTool = () => {
+    if (currentTool == "DIG") {
+      setCurrentTool(toolOptionsEnum.FLAG);
+      return;
+    }
+    if (currentTool == "FLAG") {
+      setCurrentTool(toolOptionsEnum.DIG);
+      return;
+    }
+  };
+
+  useKeyboardShortcut(["x"], toggleCurrentTool, { overrideSystem: true });
+
   return (
     <RadioGroup
       onValueChange={(value) => {
@@ -103,3 +116,4 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { styled } from "stitches.config";
 import { toolOptionsEnum, useToolStore } from "../lib/store";
 import { GearIcon, BookmarkIcon } from "@radix-ui/react-icons";
+import useKeyboardShortcut from "lib/hooks/useKeyboardShortcut";
