@@ -20,16 +20,19 @@ const FloatingToolSelector = () => {
         setCurrentTool(value);
       }}
       value={currentTool}
+      aria-label="Tool selector"
     >
       <RadioGroupItem
         selected={currentTool === "DIG"}
         value={toolOptionsEnum.DIG}
+        aria-label="Dig tool"
       >
         <GearIcon />
       </RadioGroupItem>
       <RadioGroupItem
         selected={currentTool === "FLAG"}
         value={toolOptionsEnum.FLAG}
+        aria-label="Flag tool"
       >
         <BookmarkIcon />
       </RadioGroupItem>
