@@ -2,15 +2,14 @@ export const GameEndDialog = ({
   playerWon,
   handleReset,
   handleClose,
-  open,
   ...props
 }) => {
   const { timer } = useTimerStore();
   const { difficulty } = useDifficultyStore();
 
   return (
-    <Dialog open={open} onOpenChange={handleClose} {...props}>
-      <StyledContent open={open} className={darkTheme}>
+    <Dialog onOpenChange={handleClose} {...props}>
+      <StyledContent className={darkTheme}>
         <DialogPrimitive.Title>
           {playerWon ? "Congratulations!" : "Game over!"}
         </DialogPrimitive.Title>
@@ -70,16 +69,6 @@ const StyledContent = styled(DialogPrimitive.Content, {
 
   "@motion": {
     animation: `${contentShow} 110ms cubic-bezier(0, 0, 0.3, 1)`,
-  },
-
-  variants: {
-    open: {
-      true: {
-        "@motion": {
-          animation: `${contentShow} reverse 110ms cubic-bezier(0.4, 0.14, 1, 1)`,
-        },
-      },
-    },
   },
 
   "&:focus": { outline: "none" },
