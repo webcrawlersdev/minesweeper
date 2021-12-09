@@ -1,43 +1,68 @@
 const Button = styled("button", {
+  all: "unset",
+  outline: "none",
+  cursor: "pointer",
+
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "start",
   gap: "1rem",
 
-  background: "$primary",
-  padding: ".25rem 1rem",
-  borderRadius: 9999,
+  color: "$mauve12",
 
-  font: "inherit",
-  color: "$text",
+  backgroundColor: "$crimson9",
 
-  "&:hover": {
-    background: "$primaryFocus",
-  },
+  $$borderColor: "$colors$crimson7",
+  $$borderWidth: "1px",
+  boxShadow: `0 0 0 $$borderWidth $$borderColor`,
 
-  "@media (prefers-reduced-motion: no-preference)": {
+  borderRadius: "2px",
+  padding: "0.5rem 1rem",
+  height: "min-content",
+
+  "@motion": {
     transitionDuration: "150ms",
     transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+  },
+
+  "&:hover": {
+    $$borderColor: "$colors$mauve8",
+    backgroundColor: "$crimson10",
+  },
+  "&:focus": {
+    $$borderColor: "$colors$mauve7",
+    backgroundColor: "$crimson10",
+    outline: "none",
+  },
+  "&:active": {
+    $$borderColor: "$colors$mauve8",
+    backgroundColor: "$crimson11",
+    outline: "none",
   },
 
   variants: {
     outlined: {
       true: {
+        color: "$mauve11",
+
         $$borderColor: "$colors$uiElementBorder",
+        $$borderWidth: "2px",
         backgroundColor: "$uiElementBackground",
-        boxShadow: "0 0 0 2px $$borderColor",
         border: "none",
 
         "&:hover": {
-          $$borderColor: "$colors$hoveredUiElementBorder",
-          backgroundColor: "$hoveredUiElementBackground",
-        },
-
-        "&:active": {
-          backgroundColor: "$activeUiElementBackground",
+          $$borderColor: "$colors$mauve8",
+          backgroundColor: "$mauve4",
         },
         "&:focus": {
-          backgroundColor: "$activeUiElementBackground",
+          $$borderColor: "$colors$crimson7",
+          backgroundColor: "$mauve5",
+          outline: "none",
+        },
+        "&:active": {
+          $$borderColor: "$colors$crimson8",
+          backgroundColor: "$mauve5",
+          outline: "none",
         },
       },
     },
