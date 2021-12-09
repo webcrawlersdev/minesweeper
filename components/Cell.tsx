@@ -62,11 +62,24 @@ export default function BoardCell({
   };
 
   const { gameState } = useGameStateStore();
+
+  // Remove previous flags when game starts
   useEffect(() => {
     if (gameState == boardStateEnum.PRISTINE) {
       setIsFlagged(false);
     }
   }, [gameState]);
+
+  // move focus to cell 0-0 when game starts
+  useEffect(() => {
+    if (
+      gameState == boardStateEnum.PRISTINE &&
+      coordinates.x == 0 &&
+      coordinates.y == 0
+    ) {
+      document.getElementById("cell-0-0").focus();
+    }
+  });
 
   const [isFlagged, setIsFlagged] = useState(false);
   //The cell should handle itself entirely.
