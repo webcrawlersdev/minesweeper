@@ -105,7 +105,8 @@ export default function GameHandler({
           <Row key={`row-${i}`} className="flex gap-[2px]">
             {row.map((value, j) => (
               <Cell
-                key={`cell-${i}-${j}`}
+                id={`cell-${j}-${i}`}
+                key={`cell-${j}-${i}`}
                 value={value}
                 isRevealed={isThisCellRevealed[i][j]}
                 staggerValue={cellStaggerValues[i][j]}
@@ -113,8 +114,9 @@ export default function GameHandler({
                   staggerStep.current = 0;
                   revealCell(i, j, board, board[i][j]);
                 }}
-                handleBomb={() => {
-                  console.log(`Hej do`);
+                coordinates={{
+                  x: j,
+                  y: i,
                 }}
               />
             ))}

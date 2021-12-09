@@ -1,19 +1,67 @@
 //Hello future igor, I'm sorry for this file's name. It is late and I just want to work on it
 
 export default function NewCell({
+  id,
   value,
   isRevealed,
-  handleBomb,
+  coordinates,
   staggerValue,
   handleReveal,
 }: {
+  id: string;
   value: number;
   isRevealed: boolean;
+  coordinates: { x: number; y: number };
   staggerValue: number;
-  handleBomb: () => void;
   handleReveal: () => void;
 }) {
   const { currentTool } = useToolStore();
+  const { difficulty } = useDifficultyStore();
+
+  const moveFocus = (
+    direction: "LEFT" | "RIGHT" | "UP" | "DOWN",
+    fromCoords: { x: number; y: number }
+  ) => {
+    const boardSize = difficulty.dimSize;
+    const setFocus = (coords: { x: number; y: number }) => {
+      let { x, y } = coords;
+      document.getElementById(`cell-${x}-${y}`).focus();
+    };
+
+    switch (direction) {
+      case "LEFT":
+        if (fromCoords.x > 0) {
+          setFocus({ x: fromCoords.x - 1, y: fromCoords.y });
+        } else {
+          setFocus({ x: boardSize - 1, y: fromCoords.y });
+        }
+        break;
+      case "RIGHT":
+        if (fromCoords.x < boardSize - 1) {
+          setFocus({ x: fromCoords.x + 1, y: fromCoords.y });
+        } else {
+          setFocus({ x: 0, y: fromCoords.y });
+        }
+        break;
+      case "UP":
+        if (fromCoords.y > 0) {
+          setFocus({ x: fromCoords.x, y: fromCoords.y - 1 });
+        } else {
+          setFocus({ x: fromCoords.x, y: boardSize - 1 });
+        }
+        break;
+      case "DOWN":
+        if (fromCoords.y < boardSize - 1) {
+          setFocus({ x: fromCoords.x, y: fromCoords.y + 1 });
+        } else {
+          setFocus({ x: fromCoords.x, y: 0 });
+        }
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const { gameState } = useGameStateStore();
   useEffect(() => {
@@ -72,6 +120,7 @@ export default function NewCell({
   return (
     <Box>
       <Cell
+        id={id}
         css={{
           animationDelay: `${staggerValue}ms`,
           transitionDelay: `${staggerValue}ms`,
@@ -86,10 +135,31 @@ export default function NewCell({
           handleSecondaryAction();
         }}
         onKeyDown={(e) => {
-          if (e.code === "Enter" || e.code === "Space") {
-            // this will most likely become a switch case when I try to handle navigation with the arrow keys
-            e.preventDefault();
-            handlePrimaryAction();
+          switch (e.code) {
+            case "Enter":
+            case "Space":
+              handlePrimaryAction();
+              e.preventDefault();
+              break;
+
+            case "ArrowLeft":
+              moveFocus("LEFT", coordinates);
+              e.preventDefault();
+              break;
+            case "ArrowRight":
+              moveFocus("RIGHT", coordinates);
+              e.preventDefault();
+              break;
+            case "ArrowUp":
+              moveFocus("UP", coordinates);
+              e.preventDefault();
+              break;
+            case "ArrowDown":
+              moveFocus("DOWN", coordinates);
+              e.preventDefault();
+              break;
+            default:
+              break;
           }
         }}
       >
@@ -198,6 +268,6 @@ const Cell = styled("div", {
 import { useEffect, useState } from "react";
 import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "stitches.config";
-import { useGameStateStore } from "../lib/store";
+import { useDifficultyStore, useGameStateStore } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
 import { useToolStore, toolOptionsEnum } from "../lib/store";
