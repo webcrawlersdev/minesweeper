@@ -2,12 +2,12 @@ function MyApp({ Component, pageProps }) {
   globalStyles();
 
   return (
-    <>
+    <IdProvider>
       <Head>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </IdProvider>
   );
 }
 
@@ -59,3 +59,4 @@ const globalStyles = globalCss({
 
 import Head from "next/head";
 import { globalCss } from "../stitches.config";
+import { IdProvider } from "@radix-ui/react-id";
