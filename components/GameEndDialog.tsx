@@ -74,7 +74,9 @@ const StyledContent = styled(DialogPrimitive.Content, {
   "&:focus": { outline: "none" },
 });
 
-const StyledDescription = styled(DialogPrimitive.Description);
+const StyledDescription = styled(DialogPrimitive.Description, {
+  color: "$mauve11",
+});
 
 import { ReloadIcon } from "@radix-ui/react-icons";
 import Button from "./Button";
