@@ -36,7 +36,7 @@ export const GameEndDialog = ({
               handleClose();
             }}
           >
-            Try again
+            {playerWon ? `New game` : `Try again`}
             <ReloadIcon />
           </Button>
         </Box>
