@@ -43,8 +43,6 @@ const Button = styled("button", {
   variants: {
     outlined: {
       true: {
-        color: "$mauve11",
-
         $$borderColor: "$colors$uiElementBorder",
         $$borderWidth: "2px",
         backgroundColor: "$uiElementBackground",
