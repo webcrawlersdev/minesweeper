@@ -16,7 +16,7 @@ export const GameEndDialog = ({
 
         <StyledDescription>
           {playerWon
-            ? `You revealed all ${difficulty.bombNumber} in ${formatTime(
+            ? `You revealed all ${difficulty.bombNumber} mines in ${formatTime(
                 timer
               )}`
             : `You tried your best but blew up in ${formatTime(timer)}`}
@@ -75,6 +75,7 @@ const StyledContent = styled(DialogPrimitive.Content, {
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
+  marginTop: "0.5rem",
   color: "$mauve11",
 });
 
