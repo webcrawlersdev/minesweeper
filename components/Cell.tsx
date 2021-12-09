@@ -254,7 +254,7 @@ const Cell = styled("div", {
         borderRadius: "3px",
         backgroundColor: "$primary",
 
-        "&:focus": {
+        "&:focus-visible": {
           transform: "scale(0.8)",
           backgroundColor: "$primaryFocus",
         },
