@@ -155,7 +155,7 @@ const Row = styled("div", {
   },
 });
 
-import Cell from "./NewCell";
+import Cell from "./Cell";
 
 import { styled } from "../stitches.config";
 import { useRef } from "react";

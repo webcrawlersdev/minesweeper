@@ -1,6 +1,4 @@
-//Hello future igor, I'm sorry for this file's name. It is late and I just want to work on it
-
-export default function NewCell({
+export default function BoardCell({
   id,
   value,
   isRevealed,
