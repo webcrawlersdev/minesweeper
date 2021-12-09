@@ -21,10 +21,6 @@ export default function Home() {
   // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
 
-  useEffect(() => {
-    console.log(board);
-  }, [board]);
-
   const startNewGame = () => {
     revealedCells.current = [];
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
@@ -63,8 +59,6 @@ export default function Home() {
     if (!isThisCellRevealed) {
       return;
     }
-
-    // console.table(isThisCellRevealed);
   }, [isThisCellRevealed]);
 
   const revealedCells = useRef([]);
@@ -75,7 +69,6 @@ export default function Home() {
   // show dialog when win/lose
   useEffect(() => {
     if (gameState == boardStateEnum.LOST || gameState == boardStateEnum.WON) {
-      console.log({ isOpen });
       open();
     }
   }, [gameState]);

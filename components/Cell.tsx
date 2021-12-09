@@ -92,10 +92,6 @@ export default function BoardCell({
 
     // Update the cell state
     handleReveal();
-    // Update the cell UI -- maybe this can be done reactivelly, stitches to the rescue huh
-
-    // if the value if this cell is 0, send the coordinates of this cell to the game handler so it can reveal the correct neighboring cells;
-    console.log("Handling reveal");
   };
 
   const handleFlag = () => {
@@ -104,10 +100,6 @@ export default function BoardCell({
     }
 
     setIsFlagged((prev) => !prev);
-
-    // Update the cell state
-    // Update the cell UI -- maybe this can be done reactivelly, stitches to the rescue huh
-    console.log("Handling flag");
   };
 
   const handlePrimaryAction = () => {

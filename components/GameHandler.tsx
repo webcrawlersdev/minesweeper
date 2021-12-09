@@ -67,9 +67,6 @@ export default function GameHandler({
                     (element) => element == `${checking_row}-${checking_col}`
                   )
                 ) {
-                  // console.log(
-                  //   `Running revealCell on ${checking_row}-${checking_col}, stagger value is = ${staggerTempArray[checking_row][checking_row]}`
-                  // );
                   revealCell(
                     checking_row,
                     checking_col,
@@ -83,7 +80,6 @@ export default function GameHandler({
         }
         break;
       case 9: //this was a bomb
-        console.log(`dang, ${row}-${col} was a bomb`);
         lose();
         break;
     }

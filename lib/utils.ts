@@ -61,7 +61,6 @@ export const createBoardWithJustNumbers = (
     }
   }
 
-  console.log(board);
   return board;
 };
 
