@@ -1,41 +1,97 @@
-export const GameEndDialog = ({ playerWon, onClose, handleReset }) => (
-  <Dialog className={dialog()} onClose={onClose}>
-    <h2 className={heading()}>
-      {playerWon ? "Congratulations!" : "Game over!"}
-    </h2>
+export const GameEndDialog = ({
+  playerWon,
+  handleReset,
+  handleClose,
+  open,
+  ...props
+}) => {
+  const { timer } = useTimerStore();
+  const { difficulty } = useDifficultyStore();
 
-    <Box
-      css={{
-        display: "flex",
-        justifyContent: "space-evenly",
-      }}
-    >
-      <Button
-        outlined
-        onClick={() => {
-          handleReset();
-          onClose();
-        }}
-      >
-        Try again
-        <ArrowRightIcon />
-      </Button>
-      <Button onClick={onClose}>close</Button>
-    </Box>
-  </Dialog>
-);
+  return (
+    <Dialog open={open} onOpenChange={handleClose} {...props}>
+      <StyledContent open={open} className={darkTheme}>
+        <DialogPrimitive.Title>
+          {playerWon ? "Congratulations!" : "Game over!"}
+        </DialogPrimitive.Title>
+
+        <StyledDescription>
+          {playerWon
+            ? `You revealed all ${difficulty.bombNumber} in ${formatTime(
+                timer
+              )}`
+            : `You tried your best but blew up in ${formatTime(timer)}`}
+        </StyledDescription>
+        <Box
+          css={{
+            display: "flex",
+            justifyContent: "flex-end",
+
+            marginTop: "2rem",
+          }}
+        >
+          <Button
+            outlined
+            onClick={() => {
+              handleReset();
+              handleClose();
+            }}
+          >
+            Try again
+            <ReloadIcon />
+          </Button>
+        </Box>
+      </StyledContent>
+    </Dialog>
+  );
+};
 
 const Box = styled("div");
 
-const dialog = css({
-  minWidth: 300,
+const contentShow = keyframes({
+  "0%": { opacity: 0, transform: "translate(-50%, -48%) scale(.96)" },
+  "100%": { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
 });
 
-const heading = css({
-  margin: "0 0 20px",
+const StyledContent = styled(DialogPrimitive.Content, {
+  backgroundColor: "$mauve3",
+  color: "$mauve12",
+
+  borderRadius: "3px",
+  position: "fixed",
+
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "90vw",
+  maxWidth: "360px",
+  maxHeight: "85vh",
+  padding: "1rem 2rem",
+
+  "@motion": {
+    animation: `${contentShow} 110ms cubic-bezier(0, 0, 0.3, 1)`,
+  },
+
+  variants: {
+    open: {
+      true: {
+        "@motion": {
+          animation: `${contentShow} reverse 110ms cubic-bezier(0.4, 0.14, 1, 1)`,
+        },
+      },
+    },
+  },
+
+  "&:focus": { outline: "none" },
 });
 
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+const StyledDescription = styled(DialogPrimitive.Description);
+
+import { ReloadIcon } from "@radix-ui/react-icons";
 import Button from "./Button";
-import { Dialog } from "./Dialog";
-import { styled, css } from "../stitches.config";
+import Dialog from "./Dialog";
+
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { styled, keyframes, darkTheme } from "stitches.config";
+import { useDifficultyStore, useTimerStore } from "lib/store";
+import { formatTime } from "lib/format";

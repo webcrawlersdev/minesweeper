@@ -15,6 +15,8 @@ export default function Home() {
   const { dimSize, bombNumber } = difficulty;
   // we need this to reset the game
   const { resetTimer } = useTimerStore();
+  // we need this to modal state
+  const { isOpen, close, open } = useModalStore();
 
   // game logic stuff
   const [board, setBoard] = useState<null | number[][]>(null);
@@ -29,6 +31,7 @@ export default function Home() {
     let tempArray = new Array(dimSize * dimSize).fill(false);
     setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
     resetTimer();
+    close();
     reset();
   };
 
@@ -69,13 +72,11 @@ export default function Home() {
   //animation/gesture stuff
   const target = useRef(null);
 
-  //Dialog stuff
-  const [open, setOpen] = useState(false);
-
   // show dialog when win/lose
   useEffect(() => {
     if (gameState == boardStateEnum.LOST || gameState == boardStateEnum.WON) {
-      setOpen(true);
+      console.log({ isOpen });
+      open();
     }
   }, [gameState]);
 
@@ -113,13 +114,12 @@ export default function Home() {
             </GestureContainer>
           </>
         )}
-        {open && (
-          <GameEndDialog
-            handleReset={startNewGame}
-            playerWon={gameState == boardStateEnum.WON}
-            onClose={() => setOpen(false)}
-          />
-        )}
+        <GameEndDialog
+          open={isOpen}
+          handleReset={startNewGame}
+          playerWon={gameState == boardStateEnum.WON}
+          handleClose={close}
+        />
       </GameContainer>
     </Box>
   );
@@ -160,6 +160,7 @@ import FloatingMenu from "components/FloatingMenu";
 import {
   useDifficultyStore,
   useGameStateStore,
+  useModalStore,
   useTimerStore,
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";

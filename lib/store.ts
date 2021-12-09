@@ -61,3 +61,9 @@ export const useToolStore = create((set) => ({
   currentTool: toolOptionsEnum.DIG,
   setCurrentTool: (newTool) => set(() => ({ currentTool: newTool })),
 }));
+
+export const useModalStore = create((set) => ({
+  isOpen: false,
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false }),
+}));

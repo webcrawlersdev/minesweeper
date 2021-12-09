@@ -1,47 +1,37 @@
-// made by jjenzz at https://jjenzz.com/avoid-global-state-colocate, thanks for this amazing pattern if you ever see this.
-
-import { useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { darkTheme, css } from "../stitches.config";
-
-export const Dialog = ({ onClose, ...props }) => {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const handleClick = (event) => {
-      const dialog = ref.current;
-      if (!dialog.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("click", handleClick, { capture: true });
-    return () => {
-      document.removeEventListener("click", handleClick, { capture: true });
-    };
-  });
-
-  return ReactDOM.createPortal(
-    <div
-      {...props}
-      ref={ref}
-      className={darkTheme + " " + props.className + " " + dialog()}
-    />,
-    document.body
+const Dialog = ({ children, ...props }) => {
+  return (
+    <DialogPrimitive.Root {...props}>
+      <StyledOverlay />
+      {children}
+    </DialogPrimitive.Root>
   );
 };
 
-const dialog = css({
-  position: "fixed",
-  zIndex: "9999",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-  background: "$background",
-  border: "1px solid $border",
+export default Dialog;
 
-  color: "$text",
-
-  borderRadius: 4,
-  padding: 20,
+const overlayShow = keyframes({
+  "0%": { opacity: 0 },
+  "100%": { opacity: 1 },
 });
+
+const StyledOverlay = styled(DialogPrimitive.Overlay, {
+  backgroundColor: "$mauveA9",
+  position: "fixed",
+  inset: 0,
+  "@motion": {
+    animation: `${overlayShow} 110ms cubic-bezier(0, 0, 0.3, 1)`,
+  },
+
+  variants: {
+    open: {
+      true: {
+        "@motion": {
+          animation: `${overlayShow} reverse 110ms cubic-bezier(0.4, 0.14, 1, 1)`,
+        },
+      },
+    },
+  },
+});
+
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { styled, keyframes } from "stitches.config";
