@@ -194,7 +194,7 @@ const reveal = keyframes({
     backgroundColor: "$primary",
   },
   "50%": {
-    transform: "scale(1.3)",
+    transform: "scale(1.2)",
     color: "transparent",
     backgroundColor: "$primary",
   },
@@ -205,6 +205,7 @@ const Cell = styled("div", {
   //position and zindex so this is displayed above the grid lines
   position: "relative",
   zIndex: "1",
+  border: "2px solid transparent",
 
   borderRadius: "2px",
   width: "100%",
@@ -215,6 +216,12 @@ const Cell = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+
+  "&:focus-visible": {
+    outline: "none",
+    borderColor: "$mauve12",
+    transform: "scale(0.8)",
+  },
 
   "@motion": {
     transitionDuration: "150ms",
@@ -227,7 +234,7 @@ const Cell = styled("div", {
     variant: {
       revealed: {
         "@motion": {
-          animation: `${reveal} 240ms`,
+          animation: `${reveal} 170ms`,
         },
       },
       hidden: {
@@ -237,7 +244,7 @@ const Cell = styled("div", {
         backgroundColor: "$primary",
 
         "&:focus": {
-          transform: "scale(1)",
+          transform: "scale(0.8)",
           backgroundColor: "$primaryFocus",
         },
       },
