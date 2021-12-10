@@ -4,6 +4,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <IdProvider>
       <Head>
+        <title>Minesweeper</title>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
       </Head>
       <Component {...pageProps} />
