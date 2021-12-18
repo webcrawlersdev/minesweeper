@@ -40,7 +40,7 @@ const DifficultySelector = () => {
 const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {
   display: "inline-flex",
   gap: "1rem",
-  borderRadius: "2px",
+  borderRadius: "2px"
 });
 
 const StyledItem = styled(RadioGroupPrimitive.Item, {
@@ -65,17 +65,17 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
 
   "@motion": {
     transitionDuration: "150ms",
-    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)"
   },
 
   "&:hover": {
     $$borderColor: "$colors$mauve8",
-    backgroundColor: "$mauve4",
+    backgroundColor: "$mauve4"
   },
   "&:focus": {
     $$borderColor: "$colors$crimson8",
     backgroundColor: "$mauve5",
-    outline: "none",
+    outline: "none"
   },
 
   variants: {
@@ -87,10 +87,10 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
         $$borderWidth: "2px",
         backgroundColor: "$mauve5",
 
-        "&:hover": { $$borderColor: "$colors$crimson8" },
-      },
-    },
-  },
+        "&:hover": { $$borderColor: "$colors$crimson8" }
+      }
+    }
+  }
 });
 
 const Box = styled("div");
@@ -103,7 +103,7 @@ const DifficultyCard = ({ difficulty }) => {
         flexDirection: "column",
         gap: "1rem",
         justifyContent: "center",
-        textAlign: "center",
+        textAlign: "center"
       }}
     >
       <Box>
@@ -115,10 +115,11 @@ const DifficultyCard = ({ difficulty }) => {
           display: "flex",
           alignItems: "center",
           gap: "0.5rem",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
-        <span>{difficulty.bombNumber}</span> <GearIcon aria-label="bombs" />
+        <span>{difficulty.bombNumber}</span>{" "}
+        <Crosshair2Icon aria-label="bombs" />
       </Box>
     </Box>
   );
@@ -132,4 +133,4 @@ export default DifficultySelector;
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { styled } from "stitches.config";
 import { useDifficultyStore, difficultyOptions } from "../lib/store";
-import { GearIcon } from "@radix-ui/react-icons";
+import { Crosshair2Icon } from "@radix-ui/react-icons";
