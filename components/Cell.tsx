@@ -4,7 +4,7 @@ export default function BoardCell({
   isRevealed,
   coordinates,
   staggerValue,
-  handleReveal,
+  handleReveal
 }: {
   id: string;
   value: number;
@@ -126,7 +126,7 @@ export default function BoardCell({
         id={id}
         css={{
           animationDelay: `${staggerValue}ms`,
-          transitionDelay: `${staggerValue}ms`,
+          transitionDelay: `${staggerValue}ms`
         }}
         variant={isRevealed ? "revealed" : isFlagged ? "flagged" : "hidden"}
         style={{ WebkitTapHighlightColor: "transparent" }}
@@ -168,7 +168,7 @@ export default function BoardCell({
       >
         {isRevealed ? (
           value === 9 ? (
-            <GearIcon width="30" height="30" />
+            <Crosshair2Icon width="30" height="30" />
           ) : (
             value > 0 && value
           )
@@ -187,21 +187,21 @@ const Box = styled("div", {
   zIndex: "1",
 
   width: "3rem",
-  height: "3rem",
+  height: "3rem"
 });
 
 const reveal = keyframes({
   "0%": {
     transform: "scale(1)",
     color: "transparent",
-    backgroundColor: "$primary",
+    backgroundColor: "$primary"
   },
   "50%": {
     transform: "scale(1.2)",
     color: "transparent",
-    backgroundColor: "$primary",
+    backgroundColor: "$primary"
   },
-  "100%": { transform: "scale(.9)", color: "$text" },
+  "100%": { transform: "scale(.9)", color: "$text" }
 });
 
 const Cell = styled("div", {
@@ -223,22 +223,22 @@ const Cell = styled("div", {
   "&:focus-visible": {
     outline: "none",
     borderColor: "$mauve12",
-    transform: "scale(0.8)",
+    transform: "scale(0.8)"
   },
 
   "@motion": {
     transitionDuration: "150ms",
     transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
 
-    animationTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
+    animationTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)"
   },
 
   variants: {
     variant: {
       revealed: {
         "@motion": {
-          animation: `${reveal} 170ms`,
-        },
+          animation: `${reveal} 170ms`
+        }
       },
       hidden: {
         cursor: "pointer",
@@ -248,18 +248,18 @@ const Cell = styled("div", {
 
         "&:focus-visible": {
           transform: "scale(0.8)",
-          backgroundColor: "$primaryFocus",
-        },
+          backgroundColor: "$primaryFocus"
+        }
       },
       flagged: {
         transform: "scale(0.8)",
         backgroundColor: "$flagged",
-        color: "$flagColor",
-      },
+        color: "$flagColor"
+      }
     },
     bomb: {
-      true: {},
-    },
+      true: {}
+    }
   },
 
   compoundVariants: [
@@ -269,14 +269,14 @@ const Cell = styled("div", {
       css: {
         transform: "scale(0.8)",
         backgroundColor: "$bombBackground",
-        borderRadius: "2px",
-      },
-    },
-  ],
+        borderRadius: "2px"
+      }
+    }
+  ]
 });
 
 import { useEffect, useState } from "react";
-import { BookmarkIcon, GearIcon } from "@radix-ui/react-icons";
+import { BookmarkIcon, Crosshair2Icon } from "@radix-ui/react-icons";
 import { styled, keyframes } from "stitches.config";
 import { useDifficultyStore, useGameStateStore } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
