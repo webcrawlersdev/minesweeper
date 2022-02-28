@@ -1,3 +1,4 @@
+/* TODO: This should get an array of items and create as many Items as I want OR it should handle everything here. Decide it  */
 const FloatingMenu = ({
   backToMenu,
   startNewGame,
