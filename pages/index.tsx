@@ -1,12 +1,3 @@
-// sorry for the name future Igor, also, if someone else is seeing this, shoot me a tweet at @bedesqui
-
-// https://v10-beta--use-gesture.netlify.app/docs/gestures/#about-the-pinch-gesture
-if (typeof document != "undefined") {
-  //  Should probably wrap this in a useEffect so I can clean when re rendering
-  document.addEventListener("gesturestart", (e) => e.preventDefault());
-  document.addEventListener("gesturechange", (e) => e.preventDefault());
-}
-
 export default function Home() {
   // set up variable to track game state
   const { gameState, reset } = useGameStateStore();

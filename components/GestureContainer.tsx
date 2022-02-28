@@ -1,4 +1,19 @@
 export default function GestureContainer({ children, targetRef }) {
+  // Macbook trackpads support pinching and rotating in Safari. To make sure the zooming gesture doesn't interfere with Safari accessibility zoom, you will need to prevent the gesture. https://v10-beta--use-gesture.netlify.app/docs/gestures/#about-the-pinch-gesture
+  if (typeof document != "undefined") {
+    useEffect(() => {
+      document.addEventListener("gesturestart", (e) => e.preventDefault());
+      document.addEventListener("gesturechange", (e) => e.preventDefault());
+
+      return () => {
+        document.removeEventListener("gesturestart", (e) => e.preventDefault());
+        document.removeEventListener("gesturechange", (e) =>
+          e.preventDefault()
+        );
+      };
+    });
+  }
+
   const [style, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -46,5 +61,6 @@ export default function GestureContainer({ children, targetRef }) {
   );
 }
 
+import { useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
