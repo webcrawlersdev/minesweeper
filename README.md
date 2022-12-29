@@ -19,6 +19,7 @@ I'll write a better read me at some point, for now this is a glorified TODO list
 ### Game
 
 - [ ] [Chording](https://www.minesweeper.info/wiki/Chord)???
+- [ ] Generate field after first click, losing on turn 1 is frustrating
 
 ## fixes
 
