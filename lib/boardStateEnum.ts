@@ -3,4 +3,4 @@ export const boardStateEnum = {
   IN_PROGRESS: "in_progress",
   LOST: "lost",
   WON: "won",
-};
+} as const;

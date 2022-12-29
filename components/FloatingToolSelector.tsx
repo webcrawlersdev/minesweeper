@@ -16,7 +16,7 @@ const FloatingToolSelector = () => {
 
   return (
     <RadioGroup
-      onValueChange={(value) => {
+      onValueChange={(value: Tool) => {
         setCurrentTool(value);
       }}
       value={currentTool}
@@ -57,7 +57,7 @@ const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {
   borderWidth: "1px",
   borderRadius: "3px",
   borderStyle: "solid",
-  borderColor: "$mauve6"
+  borderColor: "$mauve6",
 });
 
 const StyledItem = styled(RadioGroupPrimitive.Item, {
@@ -82,17 +82,17 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
 
   "@motion": {
     transitionDuration: "150ms",
-    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)"
+    transitionTimingFunction: "cubic-bezier(0.4, 0.14, 0.3, 1)",
   },
 
   "&:hover": {
     $$borderColor: "$colors$mauve8",
-    backgroundColor: "$mauve4"
+    backgroundColor: "$mauve4",
   },
   "&:focus": {
     $$borderColor: "$colors$crimson8",
     backgroundColor: "$mauve5",
-    outline: "none"
+    outline: "none",
   },
 
   variants: {
@@ -104,10 +104,10 @@ const StyledItem = styled(RadioGroupPrimitive.Item, {
         $$borderWidth: "2px",
         backgroundColor: "$mauve5",
 
-        "&:hover": { $$borderColor: "$colors$crimson8" }
-      }
-    }
-  }
+        "&:hover": { $$borderColor: "$colors$crimson8" },
+      },
+    },
+  },
 });
 
 const RadioGroup = StyledRadioGroup;
@@ -117,6 +117,6 @@ export default FloatingToolSelector;
 
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { styled } from "stitches.config";
-import { toolOptionsEnum, useToolStore } from "../lib/store";
+import { Tool, toolOptionsEnum, useToolStore } from "../lib/store";
 import { Crosshair2Icon, BookmarkIcon } from "@radix-ui/react-icons";
 import useKeyboardShortcut from "lib/hooks/useKeyboardShortcut";
