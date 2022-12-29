@@ -14,6 +14,7 @@ I'll write a better read me at some point, for now this is a glorified TODO list
 - [ ] Tutorial (Take inspiration from wordle)
 - [ ] Onboarding (Don't know if a landing page makes sense, I want this site to be the game as soon as you enter. An onboarding similar to flow.rest might work)
 - [ ] About modal
+- [ ] focus ring (focus states are ok but its hard to tell where I am in the menus)
 
 ### Game
 
