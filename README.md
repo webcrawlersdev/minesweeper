@@ -1,29 +1,25 @@
-# Next.js + Tailwind CSS Example
+# Minesweeper
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+I'll write a better read me at some point, for now this is a glorified TODO list ✌
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+# Roadmap
 
-## Preview
+## features
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+### Meta
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+- [ ] Command K can replace the current menu. (Don't know how this will affect the current keyboard shortcut implementation)
+  - [ ] Show/hide UI panels (time, current tool)
+  - [ ] Pause timer while in cmd+k
+- [ ] Tutorial (Take inspiration from wordle)
+- [ ] Onboarding (Don't know if a landing page makes sense, I want this site to be the game as soon as you enter. An onboarding similar to flow.rest might work)
+- [ ] About modal
 
-## Deploy your own
+### Game
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+- [ ] [Chording](https://www.minesweeper.info/wiki/Chord)???
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## fixes
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- [ ] Board moves when user moves with arrows, show do it only when the user holds space/shift + arrows
+- [ ] User cant move with numpad arrows
