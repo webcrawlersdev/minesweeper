@@ -6,11 +6,23 @@ const FloatingMenu = ({
   backToMenu: () => void;
   startNewGame: () => void;
 }) => {
-  useKeyboardShortcut(["Meta", "r"], startNewGame, { overrideSystem: true });
-  useKeyboardShortcut(["Control", "r"], startNewGame, { overrideSystem: true });
+  useKeyboardShortcut(["Meta", "r"], startNewGame, {
+    overrideSystem: true,
+    repeatOnHold: false,
+  });
+  useKeyboardShortcut(["Control", "r"], startNewGame, {
+    overrideSystem: true,
+    repeatOnHold: false,
+  });
 
-  useKeyboardShortcut(["Meta", "m"], backToMenu, { overrideSystem: true });
-  useKeyboardShortcut(["Control", "m"], backToMenu, { overrideSystem: true });
+  useKeyboardShortcut(["Meta", "m"], backToMenu, {
+    overrideSystem: true,
+    repeatOnHold: false,
+  });
+  useKeyboardShortcut(["Control", "m"], backToMenu, {
+    overrideSystem: true,
+    repeatOnHold: false,
+  });
 
   return (
     <DropdownMenu.Root>
@@ -155,5 +167,4 @@ export default FloatingMenu;
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { darkTheme, styled } from "stitches.config";
 import { HamburgerMenuIcon } from "@modulz/radix-icons";
-import { useEffect } from "react";
 import useKeyboardShortcut from "lib/hooks/useKeyboardShortcut";

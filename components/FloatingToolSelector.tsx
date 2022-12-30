@@ -12,7 +12,10 @@ const FloatingToolSelector = () => {
     }
   };
 
-  useKeyboardShortcut(["x"], toggleCurrentTool, { overrideSystem: true });
+  useKeyboardShortcut(["x"], toggleCurrentTool, {
+    overrideSystem: true,
+    repeatOnHold: false,
+  });
 
   return (
     <RadioGroup
