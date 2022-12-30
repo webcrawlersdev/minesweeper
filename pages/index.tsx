@@ -69,12 +69,13 @@ export default function Home() {
         height: "100vh",
       }}
     >
+      <CommandMenu backToMenu={backToMenu} startNewGame={startNewGame} />
       <GameContainer ref={target} css={{ touchAction: "none" }}>
         {board && (
           <>
+            <CommandMenuButton />
             <FloatingTimer />
             <FloatingToolSelector />
-            <FloatingMenu backToMenu={backToMenu} startNewGame={startNewGame} />
           </>
         )}
         {!board ? (
@@ -133,16 +134,14 @@ import { darkTheme } from "../stitches.config";
 import { singleToMultiDimentionalArray } from "../lib/utils";
 import { GameEndDialog } from "../components/GameEndDialog";
 import GestureContainer from "../components/GestureContainer";
-import Bar from "../components/Bar";
 import FloatingTimer from "components/FloatingTimer";
 import FloatingToolSelector from "components/FloatingToolSelector";
-import FloatingMenu from "components/FloatingMenu";
 
 import {
   useDifficultyStore,
   useGameStateStore,
   useModalStore,
-  useTimerStore,
 } from "../lib/store";
 import { boardStateEnum } from "../lib/boardStateEnum";
 import MainMenu from "components/MainMenu";
+import { CommandMenu, CommandMenuButton } from "components/CommandMenu";

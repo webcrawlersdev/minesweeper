@@ -1,4 +1,6 @@
 const FloatingTimer = () => {
+  const { isVisible } = useTimerVisibilityStore();
+
   return (
     <Box
       css={{
@@ -9,6 +11,7 @@ const FloatingTimer = () => {
 
         display: "flex",
         justifyContent: "center",
+        visibility: isVisible ? "visible" : "hidden",
       }}
     >
       <Box
@@ -40,3 +43,4 @@ export default FloatingTimer;
 import { StopwatchIcon } from "@modulz/radix-icons";
 import Timer from "./Timer";
 import { styled } from "../stitches.config";
+import { useTimerVisibilityStore } from "lib/store";

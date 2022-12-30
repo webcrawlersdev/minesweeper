@@ -1,5 +1,6 @@
 const FloatingToolSelector = () => {
   const { currentTool, setCurrentTool } = useToolStore();
+  const { isVisible, autoMode, show, hide } = useToolbarVisibilityStore();
 
   const toggleCurrentTool = () => {
     if (currentTool == "DIG") {
@@ -12,6 +13,17 @@ const FloatingToolSelector = () => {
     }
   };
 
+  useEffect(() => {
+    if (!autoMode) return;
+    show();
+    const clear = setTimeout(() => {
+      hide();
+    }, 3000);
+    return () => {
+      clearTimeout(clear);
+    };
+  }, [currentTool, autoMode]);
+
   useKeyboardShortcut(["x"], toggleCurrentTool, {
     overrideSystem: true,
     repeatOnHold: false,
@@ -21,6 +33,9 @@ const FloatingToolSelector = () => {
     <RadioGroup
       onValueChange={(value: Tool) => {
         setCurrentTool(value);
+      }}
+      css={{
+        visibility: isVisible ? "visible" : "hidden",
       }}
       value={currentTool}
       aria-label="Tool selector"
@@ -120,6 +135,12 @@ export default FloatingToolSelector;
 
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { styled } from "stitches.config";
-import { Tool, toolOptionsEnum, useToolStore } from "../lib/store";
+import {
+  Tool,
+  toolOptionsEnum,
+  useToolbarVisibilityStore,
+  useToolStore,
+} from "../lib/store";
 import { Crosshair2Icon, BookmarkIcon } from "@radix-ui/react-icons";
 import useKeyboardShortcut from "lib/hooks/useKeyboardShortcut";
+import { useEffect } from "react";

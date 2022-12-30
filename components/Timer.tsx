@@ -1,30 +1,42 @@
 const Timer = () => {
   const { gameState } = useGameStateStore();
   const { timer, increaseTimerBy, resetTimer } = useTimerStore();
+  const { isOpen: cmdkOpen } = useCmdkStore();
+  const { isVisible } = useTimerVisibilityStore();
 
   useEffect(() => {
-    if (
-      gameState == boardStateEnum.IN_PROGRESS ||
-      gameState == boardStateEnum.PRISTINE
-    ) {
+    if (gameState == boardStateEnum.PRISTINE) {
       resetTimer();
+    }
 
+    if (gameState == boardStateEnum.IN_PROGRESS) {
       const interval = setInterval(() => {
-        increaseTimerBy(1);
+        // pause timer when command menu is open
+        if (!cmdkOpen) {
+          console.log("cmdK is closed", cmdkOpen);
+          increaseTimerBy(1);
+        }
       }, 1000);
 
       return () => {
         clearInterval(interval);
       };
     }
-  }, [gameState]);
+  }, [gameState, cmdkOpen]);
 
-  return <div>{formatTime(timer)}</div>;
+  if (isVisible) return <div>{formatTime(timer)}</div>;
+
+  return null;
 };
 
 export default Timer;
 
 import { useEffect } from "react";
 import { boardStateEnum } from "../lib/boardStateEnum";
-import { useGameStateStore, useTimerStore } from "../lib/store";
+import {
+  useCmdkStore,
+  useGameStateStore,
+  useTimerStore,
+  useTimerVisibilityStore,
+} from "../lib/store";
 import { formatTime } from "../lib/format";

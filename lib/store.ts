@@ -91,3 +91,56 @@ export const useModalStore = create<ModalState>((set) => ({
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
 }));
+
+interface CmdkState {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+  setIsOpen: (isOpen: boolean) => void;
+}
+export const useCmdkStore = create<CmdkState>((set) => ({
+  isOpen: false,
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false }),
+  setIsOpen: (isOpen: boolean) => set({ isOpen }),
+}));
+
+interface TimerVisibilityState {
+  isVisible: boolean;
+  toggleVisibility: () => void;
+  hide: () => void;
+  show: () => void;
+}
+export const useTimerVisibilityStore = create<TimerVisibilityState>((set) => ({
+  isVisible: true,
+  toggleVisibility: () =>
+    set((state: { isVisible: boolean }) => ({
+      isVisible: !state.isVisible,
+    })),
+  hide: () => set({ isVisible: false }),
+  show: () => set({ isVisible: true }),
+}));
+
+interface ToolbarVisibilityState {
+  isVisible: boolean;
+  hide: () => void;
+  show: () => void;
+  toggleVisibility: () => void;
+  autoMode: boolean;
+  enterAutoMode: () => void;
+  exitAutoMode: () => void;
+}
+export const useToolbarVisibilityStore = create<ToolbarVisibilityState>(
+  (set) => ({
+    isVisible: true,
+    hide: () => set({ isVisible: false }),
+    show: () => set({ isVisible: true }),
+    toggleVisibility: () =>
+      set((state: { isVisible: boolean }) => ({
+        isVisible: !state.isVisible,
+      })),
+    autoMode: false,
+    enterAutoMode: () => set({ autoMode: true }),
+    exitAutoMode: () => set({ autoMode: false }),
+  })
+);
