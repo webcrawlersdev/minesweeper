@@ -23,5 +23,5 @@ I'll write a better read me at some point, for now this is a glorified TODO list
 
 ## fixes
 
-- [ ] Board moves when user moves with arrows, show do it only when the user holds space/shift + arrows
-- [ ] User cant move with numpad arrows
+- [x] Board moves when user moves with arrows, show do it only when the user holds ~~space/shift~~ ctrl + arrows
+- [x] User cant move with numpad arrows
