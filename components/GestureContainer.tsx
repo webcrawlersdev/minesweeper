@@ -22,9 +22,21 @@ export default function GestureContainer({ children, targetRef }) {
 
   useGesture(
     {
-      onDrag: ({ pinching, cancel, offset: [x, y], ...rest }) => {
-        if (pinching) return cancel();
+      onDrag: ({
+        pinching,
+        cancel,
+        offset: [x, y],
+        ctrlKey,
+        touches,
+        shiftKey,
+        ...rest
+      }) => {
+        console.log(touches, shiftKey, x, y);
+        if (pinching || (touches === 0 && !ctrlKey)) return cancel();
+
         api.start({ x, y });
+
+        console.log("after onDrag");
       },
       onPinch: ({ origin: [ox, oy], first, offset: [s], memo }) => {
         if (first) {
@@ -42,7 +54,10 @@ export default function GestureContainer({ children, targetRef }) {
     {
       target: targetRef,
       eventOptions: { passive: false },
-      drag: { from: () => [style.x.get(), style.y.get()], filterTaps: true },
+      drag: {
+        from: () => [style.x.get(), style.y.get()],
+        filterTaps: true,
+      },
       pinch: { scaleBounds: { min: 0.1, max: 10 }, rubberband: true },
       wheel: {
         bounds: { left: -700, right: 700, top: -700, bottom: 700 },
