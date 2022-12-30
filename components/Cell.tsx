@@ -61,7 +61,7 @@ export default function BoardCell({
     }
   };
 
-  const { gameState } = useGameStateStore();
+  const { gameState, start } = useGameStateStore();
 
   // Remove previous flags when game starts
   useEffect(() => {
@@ -97,6 +97,10 @@ export default function BoardCell({
   const handleFlag = () => {
     if (isRevealed) {
       return;
+    }
+
+    if (gameState == boardStateEnum.PRISTINE) {
+      start();
     }
 
     setIsFlagged((prev) => !prev);
