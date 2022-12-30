@@ -138,9 +138,9 @@ export default function BoardCell({
           handleSecondaryAction();
         }}
         onKeyDown={(e) => {
-          switch (e.code) {
+          switch (e.key) {
             case "Enter":
-            case "Space":
+            case " ":
               handlePrimaryAction();
               e.preventDefault();
               break;
