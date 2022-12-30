@@ -3,7 +3,10 @@ const Timer = () => {
   const { timer, increaseTimerBy, resetTimer } = useTimerStore();
 
   useEffect(() => {
-    if (gameState == boardStateEnum.IN_PROGRESS) {
+    if (
+      gameState == boardStateEnum.IN_PROGRESS ||
+      gameState == boardStateEnum.PRISTINE
+    ) {
       resetTimer();
 
       const interval = setInterval(() => {

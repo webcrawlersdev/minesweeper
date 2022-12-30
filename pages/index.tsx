@@ -5,7 +5,6 @@ export default function Home() {
   const { difficulty } = useDifficultyStore();
   const { dimSize, bombNumber } = difficulty;
   // we need this to reset the game
-  const { resetTimer } = useTimerStore();
   // we need this to modal state
   const { isOpen, close, open } = useModalStore();
 
@@ -17,7 +16,6 @@ export default function Home() {
     setBoard(createBoardWithJustNumbers(dimSize, bombNumber));
     let tempArray = new Array(dimSize * dimSize).fill(false);
     setIsThisCellRevealed(singleToMultiDimentionalArray(tempArray, dimSize));
-    resetTimer();
     close();
     reset();
   };
@@ -28,7 +26,6 @@ export default function Home() {
   const backToMenu = () => {
     revealedCells.current = [];
     setBoard(null);
-    resetTimer();
     reset();
   };
 
