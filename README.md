@@ -19,6 +19,7 @@ I'll write a better read me at some point, for now this is a glorified TODO list
 - [ ] refactor game logic, re-rendering the entire board on every play can't be efficient
   - [ ] reveal might be able to be async?
 - [ ] OG image + SEO stuff
+- [ ] Sounds
 
 ### Game
 
