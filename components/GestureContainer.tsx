@@ -22,15 +22,7 @@ export default function GestureContainer({ children, targetRef }) {
 
   useGesture(
     {
-      onDrag: ({
-        pinching,
-        cancel,
-        offset: [x, y],
-        ctrlKey,
-        touches,
-        shiftKey,
-        ...rest
-      }) => {
+      onDrag: ({ pinching, cancel, offset: [x, y], ctrlKey, touches }) => {
         if (pinching || (touches === 0 && !ctrlKey)) return cancel();
 
         api.start({ x, y });
