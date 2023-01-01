@@ -13,7 +13,6 @@ const Timer = () => {
       const interval = setInterval(() => {
         // pause timer when command menu is open
         if (!cmdkOpen) {
-          console.log("cmdK is closed", cmdkOpen);
           increaseTimerBy(1);
         }
       }, 1000);

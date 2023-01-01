@@ -31,12 +31,9 @@ export default function GestureContainer({ children, targetRef }) {
         shiftKey,
         ...rest
       }) => {
-        console.log(touches, shiftKey, x, y);
         if (pinching || (touches === 0 && !ctrlKey)) return cancel();
 
         api.start({ x, y });
-
-        console.log("after onDrag");
       },
       onPinch: ({ origin: [ox, oy], first, offset: [s], memo }) => {
         if (first) {
