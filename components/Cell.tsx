@@ -150,19 +150,27 @@ export default function BoardCell({
               break;
 
             case "ArrowLeft":
-              moveFocus("LEFT", coordinates);
+              if (!e.ctrlKey) {
+                moveFocus("LEFT", coordinates);
+              }
               e.preventDefault();
               break;
             case "ArrowRight":
-              moveFocus("RIGHT", coordinates);
+              if (!e.ctrlKey) {
+                moveFocus("RIGHT", coordinates);
+              }
               e.preventDefault();
               break;
             case "ArrowUp":
-              moveFocus("UP", coordinates);
+              if (!e.ctrlKey) {
+                moveFocus("UP", coordinates);
+              }
               e.preventDefault();
               break;
             case "ArrowDown":
-              moveFocus("DOWN", coordinates);
+              if (!e.ctrlKey) {
+                moveFocus("DOWN", coordinates);
+              }
               e.preventDefault();
               break;
             default:
