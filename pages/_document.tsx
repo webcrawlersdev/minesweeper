@@ -11,7 +11,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
             rel="stylesheet"
           />
-        </Head>
+        </Head>   
         <body>
           <Main />
           <NextScript />
