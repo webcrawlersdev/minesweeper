@@ -19,7 +19,7 @@ class MyDocument extends Document {
       </Html>
     );
   }
-}
+} 
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { getCssText } from "stitches.config";
