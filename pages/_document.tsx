@@ -23,6 +23,6 @@ class MyDocument extends Document {
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { getCssText } from "stitches.config";
- 
+    
 export default MyDocument;   
   
